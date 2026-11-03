@@ -80,19 +80,25 @@ Para conferir os dados estruturados, use https://search.google.com/test/rich-res
 
 Os itens da seção 4, mais a configuração do domínio e do Search Console.
 
-### Semanas 2 a 4: conteúdo próprio no site
+### Semana 2: conteúdo próprio no site (feito neste repositório)
 
-1. Uma página para cada compromisso, por exemplo `/compromissos/a-ia-nao-fala-por-nos`, gerada a partir dos arquivos `.md`.
-2. Páginas para os guias que mais atraem buscas:
+Cada compromisso e cada guia tem uma página própria, gerada a partir dos `.md` por `build/gerar-paginas.js`, com título, descrição, URL canônica, dados estruturados (Article e BreadcrumbList), trilha de navegação, navegação entre compromissos e chamada para a inscrição.
 
-   | Página | Busca que atende |
-   |---|---|
-   | `/modelo-politica-uso-ia` | "modelo de política de uso de IA" |
-   | `/antes-de-enviar` | "checklist uso de IA" |
-   | `/workslop` | "o que é workslop" |
-   | `/indicadores-adocao-ia` | "como medir adoção de IA" |
+| Página | Busca que atende |
+|---|---|
+| `/compromissos/uso-consciente` … `/compromissos/aprender-em-alianca` | Os oito compromissos |
+| `/guias/modelo-politica-uso-ia` | "modelo de política de uso de IA" |
+| `/guias/workslop` | "o que é workslop" |
+| `/guias/antes-de-enviar` | "checklist uso de IA" |
+| `/guias/indicadores-adocao-ia` | "como medir adoção de IA" |
+| `/guias/piloto-90-dias` | "piloto de IA na empresa" |
 
-3. Links internos entre compromissos e guias, e o sitemap atualizado com as páginas novas.
+A página inicial aponta para essas páginas, e o `sitemap.xml` lista os 14 endereços. Depois de publicar, envie o sitemap de novo no Search Console e peça a indexação de `/guias/modelo-politica-uso-ia` e `/guias/workslop`.
+
+### Semanas 3 e 4: revisar e medir
+
+- Acompanhar no Search Console quais páginas foram indexadas e para quais buscas aparecem.
+- Ajustar títulos e descrições das páginas que aparecem, mas recebem poucos cliques.
 
 ### Contínuo: autoridade
 

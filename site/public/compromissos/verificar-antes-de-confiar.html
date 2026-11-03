@@ -1,0 +1,239 @@
+<!doctype html>
+<!-- Gerado por site/build/gerar-paginas.js a partir de compromissos/06-verificar-antes-de-confiar.md. Edite o .md, não este arquivo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Verificar antes de confiar: como revisar o que a IA gera</title>
+<meta name="description" content="Como conferir números, SQL, código e referências gerados por IA, com checklist para times de dados.">
+<link rel="canonical" href="https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Aliança IA Consciente">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar">
+<meta property="og:title" content="Verificar antes de confiar: como revisar o que a IA gera">
+<meta property="og:description" content="Como conferir números, SQL, código e referências gerados por IA, com checklist para times de dados.">
+<meta property="og:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Verificar antes de confiar: como revisar o que a IA gera">
+<meta name="twitter:description" content="Como conferir números, SQL, código e referências gerados por IA, com checklist para times de dados.">
+<meta name="twitter:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar#artigo",
+      "headline": "Verificar antes de confiar",
+      "description": "Como conferir números, SQL, código e referências gerados por IA, com checklist para times de dados.",
+      "inLanguage": "pt-BR",
+      "url": "https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar",
+      "mainEntityOfPage": "https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar",
+      "image": "https://aliancaiaconsciente.com.br/og-image.png",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-03",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {
+        "@id": "https://aliancaiaconsciente.com.br/#organizacao"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://aliancaiaconsciente.com.br/#organizacao",
+        "name": "Aliança IA Consciente",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aliancaiaconsciente.com.br/icon-512.png"
+        }
+      },
+      "isPartOf": {
+        "@id": "https://aliancaiaconsciente.com.br/#site"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://aliancaiaconsciente.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Compromissos",
+          "item": "https://aliancaiaconsciente.com.br/#compromissos"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Verificar antes de confiar",
+          "item": "https://aliancaiaconsciente.com.br/compromissos/verificar-antes-de-confiar"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script>
+  // Quem chega pelo endereço antigo (.web.app) vai para o domínio próprio,
+  // mas só se o domínio já estiver respondendo.
+  (function(){
+    if(!/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) return;
+    var d = 'https://aliancaiaconsciente.com.br';
+    fetch(d + '/robots.txt', { mode: 'no-cors', cache: 'no-store' })
+      .then(function(){ location.replace(d + location.pathname + location.search + location.hash); })
+      .catch(function(){});
+  })();
+</script>
+<script>
+  // Aplica o tema salvo antes da pintura, para não piscar
+  (function(){ try{ var t = localStorage.getItem('aic-theme'); if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); } }catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap">
+<link rel="stylesheet" href="/assets/paginas.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/">Aliança IA Consciente</a>
+    <nav class="nav" aria-label="Principal">
+      <a class="link" href="/#compromissos">Compromissos</a>
+      <a class="link" href="/#guias">Guias</a>
+      <a class="link" href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">GitHub</a>
+      <div class="theme" role="group" aria-label="Tema">
+        <button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Escuro</button><button type="button" data-t="system">Sistema</button>
+      </div>
+      <a class="btn" href="/#participar">Quero participar</a>
+    </nav>
+  </div>
+  <div class="wrap"><hr class="double"></div>
+</header>
+
+<main class="pagina">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><ol><li><a href="/">Início</a></li><li><a href="/#compromissos">Compromissos</a></li><li aria-current="page">Verificar antes de confiar</li></ol></nav>
+    <div class="cabeca">
+      <div class="n plates num" data-text="6" aria-hidden="true">6</div>
+      <div>
+        <p class="eyebrow">Compromisso 6 de 8 · A sustentação</p>
+        <h1>Verificar antes de confiar</h1>
+        <p class="stmt">Fatos, números, fontes e código gerados por IA são conferidos antes de serem usados.</p>
+      </div>
+    </div>
+    <div class="layout">
+      <article class="prose">
+<h2>O princípio</h2>
+<p>A IA erra com confiança. Ela pode inventar um número, uma citação, uma função de biblioteca ou um artigo científico, e escrever tudo com a mesma segurança de uma resposta certa. Verificar não é desconfiar da ferramenta. É tratar a saída da IA como o trabalho de um colega muito rápido que ainda não conhece o contexto.</p>
+<h2>Por que importa</h2>
+<ul>
+<li>No experimento de Harvard com a BCG, os consultores que usaram IA numa tarefa fora da capacidade dela tenderam a suspender o próprio julgamento e erraram mais.</li>
+<li>O mesmo estudo observou que os resultados com IA ficaram mais parecidos entre si. Sem revisão crítica, todos chegam às mesmas respostas, inclusive às mesmas respostas erradas.</li>
+</ul>
+<h2>Na prática</h2>
+<ul>
+<li><strong>Números:</strong> toda métrica gerada ou calculada com IA é conferida contra a fonte oficial de dados antes de ir para um relatório.</li>
+<li><strong>Código e SQL:</strong> passam por teste e por revisão como qualquer outro código. &quot;A IA escreveu&quot; não é motivo para pular o code review.</li>
+<li><strong>Citações e referências:</strong> o link é aberto e o trecho é lido. Nunca se cita um estudo só porque a IA disse que ele existe.</li>
+<li><strong>Fatos sobre a empresa:</strong> a IA não conhece o contexto interno. Tudo que envolve regras, clientes ou números da empresa é conferido com quem sabe.</li>
+</ul>
+<h3>Checklist rápido para times de dados</h3>
+<ul>
+<li><input disabled="" type="checkbox"> A consulta roda e o resultado bate com um número conhecido (um total, um dia já fechado)?</li>
+<li><input disabled="" type="checkbox"> Os filtros e joins fazem sentido para a regra de negócio, não só para a sintaxe?</li>
+<li><input disabled="" type="checkbox"> Há teste automatizado para a transformação?</li>
+<li><input disabled="" type="checkbox"> Alguém além de quem pediu à IA revisou?</li>
+</ul>
+<h2>O que evitamos</h2>
+<ul>
+<li>Copiar e colar código gerado direto em produção.</li>
+<li>Relatórios com números que ninguém sabe de onde vieram.</li>
+<li>Referências bibliográficas não conferidas.</li>
+</ul>
+<h2>Como saber se está funcionando</h2>
+<ul>
+<li>Incidentes causados por código ou números gerados por IA são raros e, quando acontecem, viram aprendizado no encontro trimestral.</li>
+<li>Code reviews tratam código gerado por IA com o mesmo rigor.</li>
+</ul>
+<h2>Para começar amanhã</h2>
+<ol>
+<li>Na próxima resposta da IA com um número ou uma referência, confira na fonte.</li>
+<li>Adicione ao template de pull request do time a pergunta: &quot;Parte deste código foi gerada por IA? Como foi validada?&quot;</li>
+</ol>
+<h2>Fontes</h2>
+<ul>
+<li>Dell&#39;Acqua e outros. <em>Navigating the Jagged Technological Frontier</em>. Harvard Business School, 2023. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=64700" target="_blank" rel="noopener">https://www.hbs.edu/faculty/Pages/item.aspx?num=64700</a></li>
+</ul>
+
+        <nav class="paginador" aria-label="Compromissos">
+        <a class="ant" href="/compromissos/responsabilidade-humana"><small>← Anterior</small><b>5. Responsabilidade humana</b></a>
+        <a class="prox" href="/compromissos/dados-protegidos"><small>Próximo →</small><b>7. Dados protegidos</b></a>
+      </nav>
+        <div class="chamada">
+          <p>Sua empresa quer usar IA assim? Seja uma das fundadoras da aliança.</p>
+          <a class="btn" href="/#participar">Inscrever minha empresa</a>
+        </div>
+        <p class="fonte-md">Texto aberto sob <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/LICENSE" target="_blank" rel="noopener">CC BY 4.0</a>. <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/06-verificar-antes-de-confiar.md" target="_blank" rel="noopener">Ver ou sugerir mudanças no GitHub</a>.</p>
+      </article>
+      <aside class="lateral" aria-label="Navegação do manifesto">
+      <section>
+        <h2>Os oito compromissos</h2>
+        <ol>
+          <li><a href="/compromissos/uso-consciente"><span class="num">1</span>Uso consciente</a></li>
+          <li><a href="/compromissos/uso-frequente-e-medido"><span class="num">2</span>Uso frequente e medido</a></li>
+          <li><a href="/compromissos/produtividade-com-metodo"><span class="num">3</span>Produtividade com método</a></li>
+          <li><a href="/compromissos/a-ia-nao-fala-por-nos"><span class="num">4</span>A IA não fala por nós</a></li>
+          <li><a href="/compromissos/responsabilidade-humana"><span class="num">5</span>Responsabilidade humana</a></li>
+          <li><a href="/compromissos/verificar-antes-de-confiar" aria-current="page"><span class="num">6</span>Verificar antes de confiar</a></li>
+          <li><a href="/compromissos/dados-protegidos"><span class="num">7</span>Dados protegidos</a></li>
+          <li><a href="/compromissos/aprender-em-alianca"><span class="num">8</span>Aprender em aliança</a></li>
+        </ol>
+      </section>
+      <section>
+        <h2>Guias</h2>
+        <ul>
+          <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
+          <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
+          <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
+          <li><a href="/guias/indicadores-adocao-ia">Indicadores comuns da aliança</a></li>
+        </ul>
+      </section>
+    </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><hr class="double" style="flex-basis:100%"><span>Aliança IA Consciente · Manifesto, rascunho v0.1 · <a href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">Material aberto no GitHub</a></span><span>Proposta: <a href="https://www.marcosmhs.com.br/" target="_blank" rel="noopener">That Exotic Bug</a></span></div>
+</footer>
+
+<script>
+(function(){
+  // Tema
+  var root = document.documentElement;
+  var btns = document.querySelectorAll('.theme button');
+  function setTheme(t, save){
+    if(t === 'light' || t === 'dark'){ root.setAttribute('data-theme', t); } else { root.removeAttribute('data-theme'); t = 'system'; }
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-t') === t ? 'true' : 'false'); });
+    if(save){ try{ localStorage.setItem('aic-theme', t); }catch(e){} }
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.getAttribute('data-t'), true); }); });
+  var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
+  setTheme(saved, false);
+
+})();
+</script>
+</body>
+</html>
