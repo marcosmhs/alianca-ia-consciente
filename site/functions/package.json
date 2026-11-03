@@ -1,8 +1,11 @@
 {
   "name": "alianca-functions",
   "private": true,
+  "license": "MIT",
   "main": "index.js",
-  "engines": { "node": "22" },
+  "engines": {
+    "node": "22"
+  },
   "dependencies": {
     "firebase-admin": "12.7.0",
     "firebase-functions": "6.1.1",

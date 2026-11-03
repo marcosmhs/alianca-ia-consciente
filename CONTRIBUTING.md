@@ -22,6 +22,10 @@ Obrigado por querer melhorar a Aliança IA Consciente. Este repositório é o lu
 - **Seja claro e curto.** Frases diretas, voz ativa, sem jargão desnecessário.
 - **Sinalize o uso de IA.** Se a contribuição foi escrita com apoio relevante de IA, diga isso na descrição do pull request e confirme que você revisou e concorda com cada frase. É o [compromisso 4](compromissos/04-a-ia-nao-fala-por-nos.md) aplicado aqui.
 
+## Licença das contribuições
+
+Ao contribuir, você concorda que os textos são publicados sob [CC BY 4.0](LICENSE) e o código, sob [MIT](site/LICENSE), as mesmas licenças do repositório.
+
 ## Modelo de descrição de pull request
 
 ```markdown
