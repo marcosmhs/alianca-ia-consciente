@@ -1,6 +1,6 @@
 # Manifesto da Aliança IA Consciente
 
-**Usar IA todos os dias, sem deixar de ser quem assina.**
+**A IA sugere. Você decide.**
 
 Rascunho v0.1 · Novembro de 2026 · Aberto para adesão
 
@@ -55,6 +55,6 @@ Os primeiros 90 dias de cada empresa estão descritos no [Piloto de 90 dias](gui
 
 ## Adesão
 
-A inscrição de interesse é feita em **https://alianca-ia-consciente.web.app**. As empresas aparecem no site depois que a inscrição é aprovada pelo comitê.
+A inscrição de interesse é feita em **https://aliancaiaconsciente.com.br**. As empresas aparecem no site depois que a inscrição é aprovada pelo comitê.
 
 Proposta: That Exotic Bug.

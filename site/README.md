@@ -1,6 +1,8 @@
 # Site da Aliança IA Consciente
 
-Página única com o manifesto, o formulário de interesse e a lista de empresas signatárias. Publicado em https://alianca-ia-consciente.web.app.
+Domínio, Search Console e plano de SEO: veja [DOMINIO-E-SEO.md](DOMINIO-E-SEO.md).
+
+Página única com o manifesto, o formulário de interesse e a lista de empresas signatárias. Publicado em https://aliancaiaconsciente.com.br.
 
 ## Como funciona
 
