@@ -134,15 +134,15 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>As ferramentas de IA mudam a cada poucos meses. Nenhuma empresa sozinha consegue testar tudo, errar tudo e aprender tudo a tempo. Uma aliança permite dividir o custo do aprendizado: o que uma empresa descobriu, as outras não precisam descobrir do zero.</p>
 <p>Isso só funciona com honestidade. Os erros ensinam tanto quanto os acertos, e por isso também são compartilhados.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <ul>
 <li>Muitos profissionais usam IA e preferem não contar, segundo a pesquisa da Microsoft com o LinkedIn. Sem um espaço seguro para falar, cada pessoa e cada empresa repete os mesmos erros sozinha.</li>
 <li>Só 39% de quem usa IA no trabalho recebeu treinamento da empresa. Uma trilha comum reduz esse custo para todas as empresas da aliança.</li>
 </ul>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ul>
 <li><strong>Trilha mínima comum de capacitação</strong>, para todos os colaboradores das empresas signatárias, cobrindo os oito compromissos.</li>
 <li><strong>Encontro trimestral</strong> com casos reais apresentados pelas empresas. Regra: <strong>pelo menos um caso que não funcionou</strong> em cada encontro.</li>
@@ -150,7 +150,7 @@
 <li><strong>Indicadores comuns</strong>, para que cada empresa compare o próprio avanço com o das outras (veja <a href="/guias/indicadores-adocao-ia">Indicadores</a>).</li>
 <li><strong>Relatório anual</strong> da aliança, com os indicadores agregados e os principais aprendizados.</li>
 </ul>
-<h3>Formato de um caso para o encontro trimestral</h3>
+<h3 id="formato-de-um-caso-para-o-encontro-trimestral">Formato de um caso para o encontro trimestral</h3>
 <ol>
 <li><strong>Contexto:</strong> área, processo e problema (5 minutos).</li>
 <li><strong>O que tentamos:</strong> ferramenta, fluxo e como medimos (5 minutos).</li>
@@ -159,24 +159,24 @@
 <li><strong>Perguntas</strong> (10 minutos).</li>
 </ol>
 <p>Os casos seguem as regras do <a href="/compromissos/dados-protegidos">compromisso 7</a>: nada de dados pessoais ou confidenciais nos slides.</p>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Apresentar só sucessos.</li>
 <li>Compartilhar algo que expõe dados de clientes ou segredos da empresa.</li>
 <li>Transformar o encontro em vitrine comercial.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>Cada empresa apresentou pelo menos um caso no ano.</li>
 <li>Fluxos de uma empresa foram adotados por outra.</li>
 <li>O relatório anual traz aprendizados que nenhuma empresa teria chegado sozinha.</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Escolha um uso de IA que deu errado no seu time e escreva-o no formato acima.</li>
 <li>Indique uma pessoa da sua empresa para a rede de champions.</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Microsoft e LinkedIn, <em>2024 Work Trend Index</em>: <a href="https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report" target="_blank" rel="noopener">https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report</a></li>
 </ul>
@@ -209,6 +209,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -238,6 +239,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

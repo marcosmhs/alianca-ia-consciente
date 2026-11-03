@@ -134,7 +134,7 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>As cinco perguntas</h2>
+<h2 id="as-cinco-perguntas">As cinco perguntas</h2>
 <ul>
 <li><input disabled="" type="checkbox"> <strong>Eu li tudo e concordo com cada frase?</strong>
 Se tem uma frase que você não diria, ela sai.</li>
@@ -147,7 +147,7 @@ Textos de IA tendem a ser longos e genéricos. Corte e coloque a sua voz.</li>
 <li><input disabled="" type="checkbox"> <strong>Se perguntarem como fiz, eu conto que usei IA sem desconforto?</strong>
 Se a resposta for não, algo está errado no uso, não na pergunta.</li>
 </ul>
-<h2>Quando sinalizar o uso de IA</h2>
+<h2 id="quando-sinalizar-o-uso-de-ia">Quando sinalizar o uso de IA</h2>
 <div class="table-wrap"><table><thead><tr>
 <th>Situação</th>
 <th>Sinalizar?</th>
@@ -179,7 +179,7 @@ Se a resposta for não, algo está errado no uso, não na pergunta.</li>
 <td>&quot;Parte do código gerada com IA; coberta por testes.&quot;</td>
 </tr>
 </tbody></table></div>
-<h2>Zonas humanas</h2>
+<h2 id="zonas-humanas">Zonas humanas</h2>
 <p>Estes textos são escritos por pessoas, sem rascunho de IA:</p>
 <ul>
 <li>feedback individual;</li>
@@ -189,7 +189,7 @@ Se a resposta for não, algo está errado no uso, não na pergunta.</li>
 <li>pedidos de desculpa.</li>
 </ul>
 <p>Cada time pode ampliar a lista.</p>
-<h2>Versão para imprimir ou fixar na tela</h2>
+<h2 id="versao-para-imprimir-ou-fixar-na-tela">Versão para imprimir ou fixar na tela</h2>
 <pre><code>ANTES DE ENVIAR ALGO FEITO COM IA
 [ ] Li tudo e concordo com cada frase?
 [ ] Avança a tarefa de quem recebe?
@@ -223,6 +223,7 @@ Se a resposta for não, algo está errado no uso, não na pergunta.</li>
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar" aria-current="page">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -252,6 +253,20 @@ Se a resposta for não, algo está errado no uso, não na pergunta.</li>
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

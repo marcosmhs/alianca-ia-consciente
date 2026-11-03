@@ -135,7 +135,7 @@
     <div class="layout">
       <article class="prose">
 <p>O termo junta <em>work</em> (trabalho) e <em>slop</em> (lavagem, comida de baixa qualidade). Ele foi cunhado por pesquisadores da BetterUp Labs e do Stanford Social Media Lab, num artigo publicado na Harvard Business Review em setembro de 2025.</p>
-<h2>O que a pesquisa encontrou</h2>
+<h2 id="o-que-a-pesquisa-encontrou">O que a pesquisa encontrou</h2>
 <p>Os pesquisadores ouviram 1.150 profissionais em tempo integral nos Estados Unidos.</p>
 <ul>
 <li><strong>40%</strong> receberam workslop no último mês.</li>
@@ -145,7 +145,7 @@
 <li>As reações mais comuns foram irritação (53%), confusão (38%) e sensação de desrespeito (22%).</li>
 </ul>
 <p>O custo não é só tempo. O workslop transfere o trabalho de quem envia para quem recebe e corrói a confiança entre colegas.</p>
-<h2>Como reconhecer</h2>
+<h2 id="como-reconhecer">Como reconhecer</h2>
 <p>Sinais de que um texto pode ser workslop:</p>
 <ul>
 <li>É longo, mas você termina de ler sem saber o que fazer.</li>
@@ -155,14 +155,14 @@
 <li>Repete o pedido original com outras palavras, em vez de resolvê-lo.</li>
 <li>Quem enviou não consegue explicar o conteúdo quando você pergunta.</li>
 </ul>
-<h2>Por que acontece</h2>
+<h2 id="por-que-acontece">Por que acontece</h2>
 <ul>
 <li><strong>A IA torna fácil produzir volume.</strong> Gerar uma página leva segundos, e ler e editar leva minutos. A tentação é pular a segunda parte.</li>
 <li><strong>Metas de uso em vez de metas de resultado.</strong> Quando a empresa cobra &quot;usar IA&quot; sem medir o resultado, as pessoas produzem mais, não melhor.</li>
 <li><strong>Falta de treinamento.</strong> Só 39% dos usuários de IA no trabalho receberam treinamento da empresa, segundo a Microsoft e o LinkedIn.</li>
 <li><strong>Ninguém se sente dono do texto.</strong> Quando a IA escreveu, é fácil sentir que a responsabilidade é dela.</li>
 </ul>
-<h2>Como evitar, individualmente</h2>
+<h2 id="como-evitar-individualmente">Como evitar, individualmente</h2>
 <p>Antes de enviar qualquer coisa feita com IA, passe pelas <a href="/guias/antes-de-enviar">cinco perguntas do checklist</a>:</p>
 <ol>
 <li>Eu li tudo e concordo com cada frase?</li>
@@ -172,7 +172,7 @@
 <li>Se perguntarem como fiz, eu conto que usei IA sem desconforto?</li>
 </ol>
 <p>Uma regra prática: <strong>corte pela metade</strong> o que a IA escreveu. Quase sempre o texto fica melhor.</p>
-<h2>Como evitar, como time ou empresa</h2>
+<h2 id="como-evitar-como-time-ou-empresa">Como evitar, como time ou empresa</h2>
 <ul>
 <li><strong>Meça resultado, não volume.</strong> Tempo de ciclo, retrabalho e qualidade dizem mais que o número de prompts. Veja os <a href="/guias/indicadores-adocao-ia">indicadores comuns da aliança</a>.</li>
 <li><strong>Deixe claro quem responde pelo conteúdo.</strong> Na Aliança IA Consciente, a regra é &quot;eu assino o que envio&quot; (<a href="/compromissos/a-ia-nao-fala-por-nos">compromisso 4</a>).</li>
@@ -180,7 +180,7 @@
 <li><strong>Treine para editar, não só para gerar.</strong> Saber cortar, conferir e reescrever é a habilidade que separa um bom uso de IA do workslop.</li>
 <li><strong>Dê retorno com cuidado.</strong> Quando receber workslop, explique o que faltou para a tarefa avançar, em vez de só reclamar da IA.</li>
 </ul>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Niederhoffer, Rosen Kellerman, Lee, Liebscher, Rapuano e Hancock. <em>AI-Generated &quot;Workslop&quot; Is Destroying Productivity</em>. Harvard Business Review, setembro de 2025. Resumos: <a href="https://techcrunch.com/?p=3051235" target="_blank" rel="noopener">https://techcrunch.com/?p=3051235</a> e <a href="https://workplaceinsight.net/ai-generated-workslop-is-destroying-productivity-say-researchers/" target="_blank" rel="noopener">https://workplaceinsight.net/ai-generated-workslop-is-destroying-productivity-say-researchers/</a></li>
 <li>Microsoft e LinkedIn. <em>2024 Work Trend Index</em>. Resumo: <a href="https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report" target="_blank" rel="noopener">https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report</a></li>
@@ -211,6 +211,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop" aria-current="page">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -240,6 +241,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

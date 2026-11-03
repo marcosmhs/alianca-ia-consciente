@@ -50,6 +50,9 @@ const GUIAS = [
   { arq: "politica-de-uso-modelo.md", slug: "modelo-politica-uso-ia",
     titulo: "Modelo de política de uso de IA para empresas",
     descricao: "Modelo gratuito de política de uso de inteligência artificial para adaptar à sua empresa: ferramentas aprovadas, classificação de dados e LGPD." },
+  { arq: "configurar-assistentes-de-ia.md", slug: "configurar-ia",
+    titulo: "Como configurar ChatGPT, Claude, Gemini e Grok com boas práticas",
+    descricao: "Instruções prontas para copiar e o passo a passo para configurar ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI com os princípios da aliança." },
   { arq: "o-que-e-workslop.md", slug: "workslop",
     titulo: "O que é workslop e como evitar no trabalho",
     descricao: "Workslop é o conteúdo feito com IA que parece pronto, mas não faz a tarefa avançar. O que a pesquisa encontrou e como evitar." },
@@ -94,6 +97,10 @@ marked.use({
       const externo = /^https?:/.test(destino) && !destino.startsWith(DOMINIO);
       return `<a href="${esc(destino)}"${title ? ` title="${esc(title)}"` : ""}${externo ? ' target="_blank" rel="noopener"' : ""}>${text}</a>`;
     },
+    heading(text, level, raw) {
+      const id = raw.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+      return `<h${level} id="${id}">${text}</h${level}>\n`;
+    },
     table(header, body) {
       return `<div class="table-wrap"><table><thead>${header}</thead><tbody>${body}</tbody></table></div>\n`;
     },
@@ -102,7 +109,11 @@ marked.use({
 
 // URLs soltas (nas listas de fontes) viram links
 function linkarUrlsSoltas(md) {
-  return md.replace(/(^|[\s(])(https?:\/\/[^\s)<]+[^\s)<.,;:])/g, "$1<$2>");
+  // Não mexe dentro de blocos de código (```), para que o texto copiado saia igual ao original
+  return md
+    .split(/(```[\s\S]*?```)/)
+    .map((parte) => (parte.startsWith("```") ? parte : parte.replace(/(^|[\s(])(https?:\/\/[^\s)<`]+[^\s)<`.,;:])/g, "$1<$2>")))
+    .join("");
 }
 
 // ---------- Estilos e trechos reaproveitados do index.html ----------
@@ -144,8 +155,12 @@ main.pagina{padding-block:40px 72px}
 .prose blockquote{margin:1.2em 0;padding:2px 0 2px 18px;border-left:3px solid var(--cyan);color:var(--muted)}
 .prose blockquote p{margin:0}
 .prose code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.86em;background:var(--surface);padding:1px 5px;border-radius:2px}
-.prose pre{background:var(--surface);padding:14px 16px;overflow-x:auto;border-radius:2px;font-size:.84rem;line-height:1.55;margin:1.2em 0}
+.prose pre{background:var(--surface);padding:14px 16px;overflow-x:auto;white-space:pre-wrap;overflow-wrap:anywhere;border-radius:2px;font-size:.84rem;line-height:1.55;margin:1.2em 0}
 .prose pre code{background:none;padding:0;font-size:inherit}
+.bloco{position:relative}
+.bloco .copiar{position:absolute;top:8px;right:8px;font:inherit;font-size:.78rem;font-weight:600;padding:4px 10px;border-radius:2px;border:1px solid var(--rule);background:var(--paper);color:var(--ink);cursor:pointer}
+.bloco .copiar:hover{border-color:var(--ink)}
+.bloco pre{padding-top:40px}
 .table-wrap{overflow-x:auto;margin:1.2em 0 1.6em}
 .prose table{border-collapse:collapse;width:100%;font-size:.94rem}
 .prose th,.prose td{text-align:left;vertical-align:top;padding:9px 14px 9px 0;border-bottom:1px solid var(--rule)}
@@ -322,7 +337,21 @@ ${corpoHtml}
 
 <script>
 (function(){
-${JS_TEMA}})();
+${JS_TEMA}
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
+})();
 </script>
 </body>
 </html>
@@ -344,7 +373,7 @@ for (const c of COMPROMISSOS) {
   c.nomeCurto = h1.replace(/^\d+\.\s*/, "");
 }
 for (const g of GUIAS) {
-  g.nomeCurto = lerMd(`guias/${g.arq}`).h1.replace(/^Modelo de política de uso de IA$/, "Modelo de política de uso");
+  g.nomeCurto = lerMd(`guias/${g.arq}`).h1.replace(/^Modelo de política de uso de IA$/, "Modelo de política de uso").replace(/^Como configurar seu assistente de IA com os princípios da aliança$/, "Configurar seu assistente de IA");
 }
 
 fs.mkdirSync(path.join(PUBLIC, "compromissos"), { recursive: true });

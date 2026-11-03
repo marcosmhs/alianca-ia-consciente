@@ -134,14 +134,14 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>Em quase toda empresa existe alguém que descobriu um jeito ótimo de usar IA numa tarefa. Esse conhecimento costuma ficar com a pessoa, no histórico de conversas dela. Produtividade com método é tirar o bom uso do individual e torná-lo prática compartilhada: documentado, testado e fácil de repetir.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <ul>
 <li><strong>O conhecimento está isolado.</strong> Na pesquisa Work Trend Index de 2024, da Microsoft e do LinkedIn, 78% dos usuários de IA no trabalho levavam ferramentas próprias, e só 39% tinham recebido treinamento da empresa. As pessoas aprendem sozinhas e não compartilham.</li>
 <li><strong>O ganho depende da tarefa.</strong> Como mostram os estudos dos compromissos <a href="/compromissos/uso-consciente">1</a> e <a href="/compromissos/uso-frequente-e-medido">2</a>, a IA ajuda muito em algumas tarefas e pouco em outras. Um fluxo documentado registra <em>onde</em> e <em>como</em> ela ajuda.</li>
 </ul>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ul>
 <li><strong>Biblioteca de prompts e fluxos</strong> por função (dados, engenharia, produto, atendimento, comercial, pessoas), compartilhada entre as empresas da aliança. Cada entrada traz:<ul>
 <li>o problema que resolve;</li>
@@ -155,7 +155,7 @@
 <li><strong>Começar pelo que a IA faz bem:</strong> rascunhos, resumos, código repetitivo, testes, documentação, análise exploratória, tradução.</li>
 <li><strong>Revisão trimestral da biblioteca:</strong> fluxos que pararam de funcionar saem, fluxos novos entram.</li>
 </ul>
-<h3>Modelo de entrada da biblioteca</h3>
+<h3 id="modelo-de-entrada-da-biblioteca">Modelo de entrada da biblioteca</h3>
 <pre><code class="language-markdown">## Documentar uma tabela a partir do DDL
 
 **Área:** Dados · **Mantido por:** (nome) · **Última revisão:** (data)
@@ -174,25 +174,25 @@
 
 **Onde erra:** inventa significado para siglas internas. Por isso o &quot;A CONFIRMAR&quot;.
 </code></pre>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Prompts &quot;mágicos&quot; guardados só com uma pessoa.</li>
 <li>Bibliotecas enormes que ninguém mantém.</li>
 <li>Copiar fluxos de outra empresa sem testar no próprio contexto.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>A biblioteca tem fluxos com responsável e data de revisão.</li>
 <li>Pessoas novas no time usam a biblioteca nas primeiras semanas.</li>
 <li>Os fluxos mais usados têm medição de resultado (veja o <a href="/compromissos/uso-frequente-e-medido">compromisso 2</a>).</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Pense no melhor uso de IA que você fez no último mês e escreva-o no modelo acima.</li>
 <li>Pergunte a três colegas qual é o melhor uso deles.</li>
 <li>Proponha um champion para a sua área.</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Microsoft e LinkedIn. <em>2024 Work Trend Index Annual Report</em>. Resumo: <a href="https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report" target="_blank" rel="noopener">https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report</a></li>
 </ul>
@@ -225,6 +225,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -254,6 +255,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

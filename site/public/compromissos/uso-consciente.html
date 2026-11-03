@@ -134,22 +134,22 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>A IA não é igualmente boa em tudo. Em algumas tarefas ela acelera e melhora o trabalho. Em outras, entrega uma resposta convincente e errada, e quem usa deixa de perceber o erro. Uso consciente é saber em que lado da fronteira cada tarefa está antes de começar.</p>
 <p>Também é proteger o próprio raciocínio. Quando a IA pensa por nós desde o primeiro minuto, aprendemos menos e reconhecemos menos o que produzimos.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <ul>
 <li><strong>A fronteira é irregular.</strong> No experimento de Harvard com a BCG, 758 consultores fizeram tarefas reais com e sem GPT-4. Nas tarefas dentro da capacidade da IA, quem usou entregou cerca de 40% mais qualidade. Numa tarefa de análise desenhada para a IA errar, quem usou IA acertou 19 pontos percentuais a menos que quem trabalhou sozinho, porque tendeu a suspender o próprio julgamento.</li>
 <li><strong>Ordem importa.</strong> No estudo &quot;Your Brain on ChatGPT&quot;, do MIT Media Lab, quem escreveu com o ChatGPT desde o início teve menor engajamento cerebral e, em grande parte, não conseguiu citar o próprio texto minutos depois. Quem escreveu sozinho primeiro e usou IA depois se saiu bem. O estudo é pequeno e ainda não passou por revisão de pares, mas a lição prática vale: pensar primeiro, usar a IA depois.</li>
 </ul>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ul>
 <li>Antes de pedir algo à IA, escrever em uma ou duas linhas o que se espera da resposta. Isso deixa claro o critério para avaliar o que voltar.</li>
 <li>Em problemas novos, ambíguos ou de alto impacto, formar a própria hipótese antes de consultar a IA. Depois usar a IA para contestar, completar ou revisar.</li>
 <li>Manter, por área, um <strong>mapa de tarefas</strong> com três colunas: onde a IA é confiável, onde exige revisão e onde não deve ser usada. Revisar o mapa a cada trimestre, porque os modelos mudam.</li>
 <li>Desconfiar mais quando a resposta é exatamente o que se queria ouvir.</li>
 </ul>
-<h3>Exemplo de mapa de tarefas (time de dados)</h3>
+<h3 id="exemplo-de-mapa-de-tarefas-time-de-dados">Exemplo de mapa de tarefas (time de dados)</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>Confiável com revisão leve</th>
 <th>Exige revisão cuidadosa</th>
@@ -177,26 +177,26 @@
 </tr>
 </tbody></table></div>
 <p>O mapa acima é um ponto de partida. Cada time adapta o seu.</p>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Colar o problema inteiro na IA sem ter pensado nele.</li>
 <li>Aceitar uma resposta porque ela &quot;parece certa&quot;.</li>
 <li>Usar a mesma confiança para todo tipo de tarefa.</li>
 <li>Terceirizar para a IA o aprendizado de algo que a pessoa precisa dominar.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>O time tem um mapa de tarefas escrito e atualizado nos últimos 90 dias.</li>
 <li>Nas retrospectivas aparecem casos em que alguém <strong>decidiu não usar IA</strong>, e por quê.</li>
 <li>Erros causados por confiança excessiva na IA são registrados e discutidos sem culpa.</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Escolha uma tarefa recorrente e decida em qual coluna do mapa ela está.</li>
 <li>Na próxima pergunta que fizer à IA, escreva antes o que espera receber.</li>
 <li>Em uma reunião de time, monte a primeira versão do mapa em 20 minutos.</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Dell&#39;Acqua, Mollick, Lakhani e outros. <em>Navigating the Jagged Technological Frontier</em>. Harvard Business School, Working Paper 24-013, 2023. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=64700" target="_blank" rel="noopener">https://www.hbs.edu/faculty/Pages/item.aspx?num=64700</a></li>
 <li>BCG Henderson Institute. <em>Why collaboration with generative AI is so tricky and how to make it work</em>. <a href="https://bcghendersoninstitute.com/why-collaboration-with-generative-ai-is-so-tricky-and-how-to-make-it-work/" target="_blank" rel="noopener">https://bcghendersoninstitute.com/why-collaboration-with-generative-ai-is-so-tricky-and-how-to-make-it-work/</a></li>
@@ -231,6 +231,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -260,6 +261,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

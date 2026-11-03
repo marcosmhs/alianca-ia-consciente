@@ -34,6 +34,7 @@ Cada compromisso traz o princípio, a evidência que o justifica, o que muda na 
 - [Piloto de 90 dias](guias/piloto-90-dias.md): roteiro para quem acaba de entrar.
 - [Indicadores comuns](guias/indicadores.md): o que cada empresa mede e reporta por trimestre.
 - [Modelo de política de uso de IA](guias/politica-de-uso-modelo.md): para adaptar e publicar internamente.
+- [Como configurar seu assistente de IA](guias/configurar-assistentes-de-ia.md): instruções prontas para ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI.
 - [O que é workslop e como evitar](guias/o-que-e-workslop.md): o conteúdo de IA que parece pronto e não resolve nada.
 
 Todos os compromissos e guias também estão publicados como páginas do site, em https://aliancaiaconsciente.com.br.

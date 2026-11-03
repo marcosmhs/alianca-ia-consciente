@@ -134,15 +134,15 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>Proibir IA não funciona: as pessoas usam mesmo assim, só que em ferramentas pessoais e sem nenhum controle. O caminho é oferecer ferramentas corporativas seguras e regras claras e simples sobre quais dados podem ir para onde.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <ul>
 <li>Na pesquisa da Microsoft com o LinkedIn de 2024, <strong>78% dos usuários de IA no trabalho levavam ferramentas próprias</strong>, o chamado BYOAI.</li>
 <li>No Brasil, os estudos estimam a adoção de IA generativa entre 48% (FGV) e 95% (Bain e Microsoft) das empresas, conforme a metodologia, e a <strong>governança de dados aparece como o maior desafio</strong>.</li>
 <li>A LGPD vale para dados pessoais de clientes e colaboradores, inclusive quando eles são colados num chat de IA.</li>
 </ul>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ul>
 <li><strong>Lista de ferramentas aprovadas</strong>, pública internamente, dizendo para que serve cada uma e quais dados ela pode receber.</li>
 <li><strong>Classificação simples de dados</strong>, com uma regra clara para cada nível:</li>
@@ -178,25 +178,25 @@
 <li><strong>Anonimizar por padrão:</strong> para pedir ajuda com uma consulta ou um dataset, use dados de exemplo ou mascarados.</li>
 </ul>
 <p>Veja o <a href="/guias/modelo-politica-uso-ia">modelo de política de uso</a> para adaptar à sua empresa.</p>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Proibir sem oferecer alternativa.</li>
 <li>Colar a base de clientes num chat para &quot;ver o que a IA acha&quot;.</li>
 <li>Regras tão complexas que ninguém lembra.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>As pessoas sabem dizer, sem consultar, em qual ferramenta podem colar cada tipo de dado.</li>
 <li>O uso de ferramentas pessoais para trabalho diminui ao longo do tempo.</li>
 <li>Não há incidentes de vazamento envolvendo ferramentas de IA.</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Descubra quais ferramentas de IA a sua empresa já aprovou.</li>
 <li>Revise seus últimos prompts: algum tinha dado pessoal ou segredo?</li>
 <li>Proponha a tabela de classificação acima para a área de segurança ou para o DPO.</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Microsoft e LinkedIn, <em>2024 Work Trend Index</em>: <a href="https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report" target="_blank" rel="noopener">https://fortune.com/2024/05/10/employees-secretly-bringing-ai-tools-work-microsoft-report</a></li>
 <li>Bain e Microsoft, adoção de IA no Brasil: <a href="https://neuralnet.com.br/95-empresas-brasileiras-adotam-ia-governanca-dados-bain-2026/" target="_blank" rel="noopener">https://neuralnet.com.br/95-empresas-brasileiras-adotam-ia-governanca-dados-bain-2026/</a></li>
@@ -230,6 +230,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -259,6 +260,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>
