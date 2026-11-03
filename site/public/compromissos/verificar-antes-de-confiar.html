@@ -134,44 +134,44 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>A IA erra com confiança. Ela pode inventar um número, uma citação, uma função de biblioteca ou um artigo científico, e escrever tudo com a mesma segurança de uma resposta certa. Verificar não é desconfiar da ferramenta. É tratar a saída da IA como o trabalho de um colega muito rápido que ainda não conhece o contexto.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <ul>
 <li>No experimento de Harvard com a BCG, os consultores que usaram IA numa tarefa fora da capacidade dela tenderam a suspender o próprio julgamento e erraram mais.</li>
 <li>O mesmo estudo observou que os resultados com IA ficaram mais parecidos entre si. Sem revisão crítica, todos chegam às mesmas respostas, inclusive às mesmas respostas erradas.</li>
 </ul>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ul>
 <li><strong>Números:</strong> toda métrica gerada ou calculada com IA é conferida contra a fonte oficial de dados antes de ir para um relatório.</li>
 <li><strong>Código e SQL:</strong> passam por teste e por revisão como qualquer outro código. &quot;A IA escreveu&quot; não é motivo para pular o code review.</li>
 <li><strong>Citações e referências:</strong> o link é aberto e o trecho é lido. Nunca se cita um estudo só porque a IA disse que ele existe.</li>
 <li><strong>Fatos sobre a empresa:</strong> a IA não conhece o contexto interno. Tudo que envolve regras, clientes ou números da empresa é conferido com quem sabe.</li>
 </ul>
-<h3>Checklist rápido para times de dados</h3>
+<h3 id="checklist-rapido-para-times-de-dados">Checklist rápido para times de dados</h3>
 <ul>
 <li><input disabled="" type="checkbox"> A consulta roda e o resultado bate com um número conhecido (um total, um dia já fechado)?</li>
 <li><input disabled="" type="checkbox"> Os filtros e joins fazem sentido para a regra de negócio, não só para a sintaxe?</li>
 <li><input disabled="" type="checkbox"> Há teste automatizado para a transformação?</li>
 <li><input disabled="" type="checkbox"> Alguém além de quem pediu à IA revisou?</li>
 </ul>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Copiar e colar código gerado direto em produção.</li>
 <li>Relatórios com números que ninguém sabe de onde vieram.</li>
 <li>Referências bibliográficas não conferidas.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>Incidentes causados por código ou números gerados por IA são raros e, quando acontecem, viram aprendizado no encontro trimestral.</li>
 <li>Code reviews tratam código gerado por IA com o mesmo rigor.</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Na próxima resposta da IA com um número ou uma referência, confira na fonte.</li>
 <li>Adicione ao template de pull request do time a pergunta: &quot;Parte deste código foi gerada por IA? Como foi validada?&quot;</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Dell&#39;Acqua e outros. <em>Navigating the Jagged Technological Frontier</em>. Harvard Business School, 2023. <a href="https://www.hbs.edu/faculty/Pages/item.aspx?num=64700" target="_blank" rel="noopener">https://www.hbs.edu/faculty/Pages/item.aspx?num=64700</a></li>
 </ul>
@@ -204,6 +204,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -233,6 +234,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

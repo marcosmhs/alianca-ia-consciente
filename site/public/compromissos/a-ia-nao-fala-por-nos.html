@@ -134,10 +134,10 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>O princípio</h2>
+<h2 id="o-principio">O princípio</h2>
 <p>A IA escreve rápido e bem. Isso é ótimo para rascunhar, encurtar, traduzir e esclarecer. O risco é ela passar a falar no nosso lugar: mensagens que ninguém leu de verdade, relatórios inflados, respostas que parecem completas e não resolvem nada.</p>
 <p>Este é o compromisso que diferencia a aliança. Usamos IA para comunicar <strong>melhor</strong>, nunca para comunicar <strong>por nós</strong>.</p>
-<h2>Por que importa</h2>
+<h2 id="por-que-importa">Por que importa</h2>
 <p>A pesquisa da Stanford com a BetterUp, publicada na Harvard Business Review em 2025, deu nome ao problema: <strong>workslop</strong>, o conteúdo feito com IA que parece trabalho pronto, mas não faz a tarefa avançar.</p>
 <ul>
 <li>40% dos 1.150 profissionais entrevistados nos EUA receberam workslop no último mês.</li>
@@ -145,7 +145,7 @@
 <li>42% passaram a ver o remetente como menos confiável, e 32% disseram preferir não trabalhar mais com essa pessoa.</li>
 </ul>
 <p>O custo não é só tempo. É confiança entre colegas.</p>
-<h2>Na prática</h2>
+<h2 id="na-pratica">Na prática</h2>
 <ol>
 <li><strong>Eu assino o que envio.</strong> Quem envia responde por cada frase, inclusive as que a IA escreveu.</li>
 <li><strong>A IA rascunha, a pessoa decide.</strong> Nada sai sem passar pela leitura, pelo corte e pelo julgamento de quem envia.</li>
@@ -155,26 +155,26 @@
 <li><strong>Mais claro, não maior.</strong> A IA serve para encurtar e esclarecer, não para inflar.</li>
 </ol>
 <p>Antes de enviar, use o <a href="/guias/antes-de-enviar">checklist &quot;Antes de enviar&quot;</a>.</p>
-<h2>O que evitamos</h2>
+<h2 id="o-que-evitamos">O que evitamos</h2>
 <ul>
 <li>Responder a um e-mail longo com outro e-mail longo gerado por IA que ninguém leu.</li>
 <li>Documentos com cara de completos e sem nenhuma decisão.</li>
 <li>Usar IA para parecer mais produtivo ou mais especialista do que se é.</li>
 <li>Esconder que usou IA quando alguém pergunta.</li>
 </ul>
-<h2>Como saber se está funcionando</h2>
+<h2 id="como-saber-se-esta-funcionando">Como saber se está funcionando</h2>
 <ul>
 <li>Na pesquisa interna de comunicação, a pergunta &quot;as mensagens que recebo são claras e úteis?&quot; melhora ao longo dos trimestres.</li>
 <li>Ninguém sente desconforto em dizer que usou IA.</li>
 <li>Os textos ficam mais curtos, não mais longos.</li>
 </ul>
-<h2>Para começar amanhã</h2>
+<h2 id="para-comecar-amanha">Para começar amanhã</h2>
 <ol>
 <li>Antes do próximo e-mail feito com IA, corte pela metade o que ela escreveu.</li>
 <li>Sinalize uma vez, para o time, quando usar IA num resumo. Veja como as pessoas reagem.</li>
 <li>Defina com o time quais são as zonas humanas de vocês.</li>
 </ol>
-<h2>Fontes</h2>
+<h2 id="fontes">Fontes</h2>
 <ul>
 <li>Niederhoffer, Rosen Kellerman, Lee, Liebscher, Rapuano e Hancock. <em>AI-Generated &quot;Workslop&quot; Is Destroying Productivity</em>. Harvard Business Review, setembro de 2025. Resumos: <a href="https://techcrunch.com/?p=3051235" target="_blank" rel="noopener">https://techcrunch.com/?p=3051235</a> e <a href="https://workplaceinsight.net/ai-generated-workslop-is-destroying-productivity-say-researchers/" target="_blank" rel="noopener">https://workplaceinsight.net/ai-generated-workslop-is-destroying-productivity-say-researchers/</a></li>
 </ul>
@@ -207,6 +207,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -236,6 +237,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

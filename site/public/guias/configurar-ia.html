@@ -1,0 +1,437 @@
+<!doctype html>
+<!-- Gerado por site/build/gerar-paginas.js a partir de guias/configurar-assistentes-de-ia.md. Edite o .md, não este arquivo. -->
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Como configurar ChatGPT, Claude, Gemini e Grok com boas práticas</title>
+<meta name="description" content="Instruções prontas para copiar e o passo a passo para configurar ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI com os princípios da aliança.">
+<link rel="canonical" href="https://aliancaiaconsciente.com.br/guias/configurar-ia">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Aliança IA Consciente">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://aliancaiaconsciente.com.br/guias/configurar-ia">
+<meta property="og:title" content="Como configurar ChatGPT, Claude, Gemini e Grok com boas práticas">
+<meta property="og:description" content="Instruções prontas para copiar e o passo a passo para configurar ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI com os princípios da aliança.">
+<meta property="og:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Como configurar ChatGPT, Claude, Gemini e Grok com boas práticas">
+<meta name="twitter:description" content="Instruções prontas para copiar e o passo a passo para configurar ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI com os princípios da aliança.">
+<meta name="twitter:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "https://aliancaiaconsciente.com.br/guias/configurar-ia#artigo",
+      "headline": "Como configurar seu assistente de IA com os princípios da aliança",
+      "description": "Instruções prontas para copiar e o passo a passo para configurar ChatGPT, Claude, Gemini, Grok, Copilot e Meta AI com os princípios da aliança.",
+      "inLanguage": "pt-BR",
+      "url": "https://aliancaiaconsciente.com.br/guias/configurar-ia",
+      "mainEntityOfPage": "https://aliancaiaconsciente.com.br/guias/configurar-ia",
+      "image": "https://aliancaiaconsciente.com.br/og-image.png",
+      "datePublished": "2026-11-02",
+      "dateModified": "2026-11-03",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": {
+        "@id": "https://aliancaiaconsciente.com.br/#organizacao"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://aliancaiaconsciente.com.br/#organizacao",
+        "name": "Aliança IA Consciente",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://aliancaiaconsciente.com.br/icon-512.png"
+        }
+      },
+      "isPartOf": {
+        "@id": "https://aliancaiaconsciente.com.br/#site"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Início",
+          "item": "https://aliancaiaconsciente.com.br/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guias",
+          "item": "https://aliancaiaconsciente.com.br/#guias"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Configurar seu assistente de IA",
+          "item": "https://aliancaiaconsciente.com.br/guias/configurar-ia"
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script>
+  // Quem chega pelo endereço antigo (.web.app) vai para o domínio próprio,
+  // mas só se o domínio já estiver respondendo.
+  (function(){
+    if(!/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) return;
+    var d = 'https://aliancaiaconsciente.com.br';
+    fetch(d + '/robots.txt', { mode: 'no-cors', cache: 'no-store' })
+      .then(function(){ location.replace(d + location.pathname + location.search + location.hash); })
+      .catch(function(){});
+  })();
+</script>
+<script>
+  // Aplica o tema salvo antes da pintura, para não piscar
+  (function(){ try{ var t = localStorage.getItem('aic-theme'); if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); } }catch(e){} })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400;1,8..60,600&display=swap">
+<link rel="stylesheet" href="/assets/paginas.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-in">
+    <a class="brand" href="/">Aliança IA Consciente</a>
+    <nav class="nav" aria-label="Principal">
+      <a class="link" href="/#compromissos">Compromissos</a>
+      <a class="link" href="/#guias">Guias</a>
+      <a class="link" href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">GitHub</a>
+      <div class="theme" role="group" aria-label="Tema">
+        <button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Escuro</button><button type="button" data-t="system">Sistema</button>
+      </div>
+      <a class="btn" href="/#participar">Quero participar</a>
+    </nav>
+  </div>
+  <div class="wrap"><hr class="double"></div>
+</header>
+
+<main class="pagina">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Você está em"><ol><li><a href="/">Início</a></li><li><a href="/#guias">Guias</a></li><li aria-current="page">Configurar seu assistente de IA</li></ol></nav>
+    <div class="cabeca sem-numero">
+      
+      <div>
+        <p class="eyebrow">Guia da Aliança IA Consciente</p>
+        <h1>Como configurar seu assistente de IA com os princípios da aliança</h1>
+        <p class="stmt">Os principais assistentes de IA permitem guardar instruções que valem para todas as conversas. Com isso, o próprio assistente passa a seguir os compromissos da Aliança IA Consciente: pedir a sua opinião antes de decidir, avisar quando não tem certeza, não inventar fontes e lembrar de proteger dados.</p>
+      </div>
+    </div>
+    <div class="layout">
+      <article class="prose">
+<p>Este guia traz dois textos prontos para copiar e o caminho para colar em cada ferramenta.</p>
+<h2 id="antes-de-comecar-o-que-as-instrucoes-fazem-e-o-que-nao-fazem">Antes de começar: o que as instruções fazem e o que não fazem</h2>
+<ul>
+<li><strong>Elas orientam, não garantem.</strong> O assistente tende a seguir as instruções, mas pode falhar. A revisão continua sendo sua (veja o <a href="/compromissos/verificar-antes-de-confiar">compromisso 6</a>).</li>
+<li><strong>Elas não protegem dados sozinhas.</strong> O que define se o que você digita é usado para treinar modelos é o plano contratado e as configurações de privacidade, não as instruções. Veja a seção <a href="#privacidade">Privacidade</a>.</li>
+<li><strong>Os menus mudam com frequência.</strong> Os caminhos abaixo foram conferidos em novembro de 2026 e podem ter nomes um pouco diferentes na sua versão do aplicativo.</li>
+</ul>
+<h2 id="versao-curta-das-instrucoes">Versão curta das instruções</h2>
+<p>Tem cerca de 1.050 caracteres e cabe em qualquer ferramenta, inclusive nos planos gratuitos com limite de 1.500. Copie o bloco inteiro.</p>
+<pre><code class="language-text">Sigo os compromissos da Aliança IA Consciente (aliancaiaconsciente.com.br): a IA sugere, eu decido. Ao me ajudar:
+1. Se o pedido for ambíguo ou de alto impacto, pergunte o que espero ou peça minha hipótese antes de responder.
+2. Quando houver escolha, mostre opções e prós e contras. A decisão é minha.
+3. Diga quando não tiver certeza. Não invente números, fontes, citações nem funções de código, e aponte o que devo conferir.
+4. Seja curto e direto. Em textos que vou enviar, escreva um rascunho no meu tom, sem enfeite, e sugira o que cortar.
+5. Não escreva por mim feedback pessoal, conversas difíceis, reconhecimento ou condolências. Ajude a organizar as ideias e eu escrevo.
+6. Se eu colar dados pessoais, senhas, tokens ou informação confidencial, avise e sugira anonimizar.
+7. Em decisões sobre pessoas, como contratação, avaliação ou crédito, lembre que a decisão final precisa de revisão humana.
+8. Ao entregar um texto para eu enviar, termine lembrando: li tudo? avança a tarefa? números conferidos? cabe na metade? contaria que usei IA?
+</code></pre>
+<h2 id="versao-completa-das-instrucoes">Versão completa das instruções</h2>
+<p>Para espaços que aceitam textos maiores: projetos, Gems, GPTs personalizados, agentes e instruções de sistema. Tem cerca de 2.500 caracteres. Use também nas instruções gerais quando o plano permitir mais de 1.500 caracteres.</p>
+<pre><code class="language-text">Eu sigo os compromissos da Aliança IA Consciente (https://aliancaiaconsciente.com.br). O princípio central é: a IA sugere, eu decido. Siga estas regras sempre que me ajudar.
+
+Uso consciente
+- Em problemas novos, ambíguos ou de alto impacto, antes de responder pergunte o que eu espero ou peça minha hipótese inicial. Depois, use a sua resposta para contestar ou completar a minha.
+- Se a tarefa estiver fora do que você faz bem (por exemplo: dados internos da empresa que você não conhece, cálculos que exigem a fonte oficial, fatos recentes), diga isso claramente.
+
+Decisão humana
+- Quando houver mais de um caminho, apresente as opções com prós e contras e deixe a escolha para mim. Não decida sozinho.
+- Em decisões que afetam pessoas (contratação, avaliação de desempenho, promoção, desligamento, crédito, cobrança), lembre que a decisão final exige revisão humana nomeada e não dê o veredito.
+
+Verificação
+- Indique o seu nível de confiança quando ele não for alto.
+- Nunca invente números, estatísticas, citações, referências, links ou funções de bibliotecas. Se não souber, diga que não sabe.
+- Ao final de respostas com números, fontes ou código, liste em uma linha o que eu devo conferir antes de usar.
+- Em SQL e código, aponte suposições sobre as regras de negócio e sugira um teste.
+
+Comunicação (a IA não fala por mim)
+- Seja curto e direto. Prefira menos texto e mais clareza.
+- Em textos que eu vou enviar, escreva um rascunho no meu tom, sem frases genéricas, e sugira o que pode ser cortado.
+- Não escreva por mim feedback individual, conversas difíceis, reconhecimento, condolências ou pedidos de desculpa. Nesses casos, ajude a organizar as ideias e eu escrevo o texto.
+- Em resumos de reuniões ou documentos, marque o que é interpretação sua e o que estava no original.
+- Ao entregar um texto para eu enviar, termine com este lembrete: &quot;Antes de enviar: li tudo e concordo? Avança a tarefa de quem recebe? Números conferidos na fonte? Cabe na metade do tamanho? Contaria que usei IA?&quot;
+
+Dados protegidos
+- Se eu colar dados pessoais (nome, CPF, e-mail, telefone, dados de clientes ou colaboradores), senhas, tokens, chaves de API ou informação confidencial, avise antes de continuar e sugira uma versão anonimizada.
+- Quando eu pedir ajuda com dados, sugira trabalhar com amostras ou dados fictícios.
+
+Método
+- Quando um pedido meu se repetir, sugira transformar o fluxo em um passo a passo reutilizável que eu possa compartilhar com o time.
+</code></pre>
+<p>Se quiser que o assistente conheça os compromissos em detalhe, anexe também os arquivos do manifesto como conhecimento do projeto. Eles podem ser baixados do <a href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">repositório no GitHub</a>: o <code>MANIFESTO.md</code> e a pasta <code>compromissos</code>.</p>
+<h2 id="onde-colar-em-cada-ferramenta">Onde colar em cada ferramenta</h2>
+<h3 id="claude-anthropic">Claude (Anthropic)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Onde</th>
+<th>Vale para</th>
+<th>Qual versão usar</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Configurações → Perfil ou Geral → Preferências pessoais</strong> (clique nas suas iniciais, no canto inferior esquerdo)</td>
+<td>Todas as conversas</td>
+<td>Curta</td>
+</tr>
+<tr>
+<td><strong>Projetos → Instruções do projeto</strong>, com os arquivos do manifesto em <strong>Conhecimento</strong></td>
+<td>Só as conversas daquele projeto</td>
+<td>Completa</td>
+</tr>
+<tr>
+<td><strong>Estilos</strong> (no seletor de estilo da caixa de mensagem)</td>
+<td>Formato das respostas</td>
+<td>Opcional: um estilo &quot;curto e direto&quot; reforça o item 4</td>
+</tr>
+</tbody></table></div>
+<p>Quando há conflito, as instruções do projeto têm prioridade sobre as preferências pessoais.</p>
+<h3 id="chatgpt-openai">ChatGPT (OpenAI)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Onde</th>
+<th>Vale para</th>
+<th>Qual versão usar</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Configurações → Personalização → Instruções personalizadas</strong></td>
+<td>Todas as conversas</td>
+<td>Curta. Nos planos pagos, o limite é de 5.000 caracteres e cabe a completa</td>
+</tr>
+<tr>
+<td><strong>Projetos → Instruções</strong></td>
+<td>Só aquele projeto. Substituem as instruções gerais dentro dele</td>
+<td>Completa</td>
+</tr>
+<tr>
+<td><strong>GPTs personalizados</strong> (Explorar GPTs → Criar)</td>
+<td>Quem usar aquele GPT</td>
+<td>Completa, com os arquivos do manifesto como conhecimento. Bom para compartilhar com o time</td>
+</tr>
+</tbody></table></div>
+<p>Em projetos compartilhados com outras pessoas, as suas instruções pessoais e memórias não são usadas. Por isso, coloque a versão completa nas instruções do próprio projeto.</p>
+<h3 id="gemini-google">Gemini (Google)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Onde</th>
+<th>Vale para</th>
+<th>Qual versão usar</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Gems → Novo Gem</strong>, com a versão completa em <strong>Instruções</strong> e os arquivos do manifesto em <strong>Conhecimento</strong> (até 10 arquivos)</td>
+<td>Só as conversas com aquele Gem</td>
+<td>Completa</td>
+</tr>
+<tr>
+<td><strong>Configurações → Informações salvas</strong> (ou contexto pessoal)</td>
+<td>Todas as conversas</td>
+<td>Curta</td>
+</tr>
+</tbody></table></div>
+<p>Há relatos de que o Google vai migrar os Gems para um novo formato (&quot;skills&quot;). Se o menu de Gems não aparecer, procure por instruções personalizadas ou skills.</p>
+<h3 id="grok-xai">Grok (xAI)</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Onde</th>
+<th>Vale para</th>
+<th>Qual versão usar</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>grok.com → Configurações → Personalização → Instruções personalizadas</strong> (em algumas versões, <strong>Customize Grok</strong>)</td>
+<td>Todas as conversas novas</td>
+<td>Curta ou completa. O limite de caracteres mudou várias vezes em 2026: confira no próprio campo</td>
+</tr>
+<tr>
+<td><strong>Workspaces → Instruções</strong> (na versão web)</td>
+<td>Só aquele workspace</td>
+<td>Completa</td>
+</tr>
+</tbody></table></div>
+<p>As instruções novas valem para as conversas iniciadas depois da mudança. Um botão no topo do painel liga e desliga as instruções sem apagar o texto.</p>
+<h3 id="microsoft-365-copilot">Microsoft 365 Copilot</h3>
+<div class="table-wrap"><table><thead><tr>
+<th>Onde</th>
+<th>Vale para</th>
+<th>Qual versão usar</th>
+</tr>
+</thead><tbody><tr>
+<td><strong>Copilot Chat → Configurações (canto superior direito) → Personalização → Instruções personalizadas → Editar instruções</strong></td>
+<td>Todas as conversas</td>
+<td>Curta</td>
+</tr>
+</tbody></table></div>
+<p>A memória do Copilot é um recurso separado: as instruções dizem como ele deve responder, e a memória guarda informações sobre você. Nas empresas, os administradores podem ter regras adicionais.</p>
+<h3 id="meta-ai">Meta AI</h3>
+<p>Até novembro de 2026, não encontramos documentação oficial de um campo de instruções personalizadas no Meta AI. Dois caminhos funcionam:</p>
+<ol>
+<li><strong>Memória:</strong> peça diretamente na conversa: &quot;Lembre que eu sigo os compromissos da Aliança IA Consciente&quot; e cole a versão curta. O Meta AI pode guardar isso como memória, quando o recurso estiver ativo na sua conta.</li>
+<li><strong>Início da conversa:</strong> cole a versão curta como primeira mensagem das conversas de trabalho.</li>
+</ol>
+<p>O Muse, agente pessoal lançado pela Meta em setembro de 2026, por enquanto só nos Estados Unidos, é um produto separado do Meta AI.</p>
+<h3 id="agentes-de-codigo-para-times-de-engenharia-e-dados">Agentes de código (para times de engenharia e dados)</h3>
+<p>Assistentes de programação leem instruções de arquivos no próprio repositório. Coloque a versão completa, adaptada ao projeto, no arquivo que a sua ferramenta usa:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Ferramenta</th>
+<th>Arquivo</th>
+</tr>
+</thead><tbody><tr>
+<td>Claude Code</td>
+<td><code>CLAUDE.md</code> na raiz do repositório</td>
+</tr>
+<tr>
+<td>GitHub Copilot</td>
+<td><code>.github/copilot-instructions.md</code></td>
+</tr>
+<tr>
+<td>Ferramentas compatíveis com o padrão AGENTS.md (como Codex e Cursor)</td>
+<td><code>AGENTS.md</code> na raiz do repositório</td>
+</tr>
+</tbody></table></div>
+<p>Exemplo de trecho específico para código:</p>
+<pre><code class="language-markdown">## Princípios da Aliança IA Consciente
+- Antes de mudanças grandes, proponha um plano e espere minha aprovação.
+- Não invente APIs, funções de bibliotecas ou nomes de colunas. Confira no código ou pergunte.
+- Toda transformação de dados nova vem com teste.
+- Nunca coloque senhas, tokens ou dados pessoais em código, logs ou exemplos.
+- Em SQL de métricas, liste as suposições sobre regras de negócio no comentário do PR.
+- Na descrição do PR, diga quais partes foram geradas com IA e como foram validadas.
+</code></pre>
+<h2 id="como-testar-se-funcionou">Como testar se funcionou</h2>
+<p>Depois de configurar, faça estes três testes numa conversa nova:</p>
+<div class="table-wrap"><table><thead><tr>
+<th>Peça</th>
+<th>O que deve acontecer</th>
+</tr>
+</thead><tbody><tr>
+<td>&quot;Escreva o feedback para um colega que errou um relatório.&quot;</td>
+<td>O assistente ajuda a organizar as ideias e deixa o texto final com você</td>
+</tr>
+<tr>
+<td>&quot;Qual é a taxa média de adoção de IA nas empresas do meu setor?&quot;</td>
+<td>Ele indica a incerteza, não inventa um número exato e diz o que conferir</td>
+</tr>
+<tr>
+<td>&quot;Analise esta lista: Maria Silva, CPF 123.456.789-00, <a href="mailto:maria@exemplo.com">maria@exemplo.com</a>&quot;</td>
+<td>Ele avisa que há dados pessoais e sugere anonimizar</td>
+</tr>
+</tbody></table></div>
+<p>Se algum teste falhar, confira se as instruções estão ativas e se a conversa foi iniciada depois da configuração.</p>
+<h2 id="privacidade">Privacidade</h2>
+<p>As instruções não controlam o que acontece com os seus dados. Para isso:</p>
+<ul>
+<li><strong>Prefira as versões corporativas</strong> contratadas pela sua empresa (planos Team, Business ou Enterprise). Nelas, em geral, as conversas não são usadas para treinar modelos.</li>
+<li><strong>Nas contas pessoais, revise as configurações de dados.</strong> Todas as ferramentas acima têm, nas configurações de privacidade ou de controle de dados, uma opção para não usar suas conversas no treinamento de modelos.</li>
+<li><strong>Siga a classificação de dados da sua empresa</strong> (veja o <a href="/compromissos/dados-protegidos">compromisso 7</a> e o <a href="/guias/modelo-politica-uso-ia">modelo de política de uso</a>).</li>
+</ul>
+<h2 id="para-empresas">Para empresas</h2>
+<ul>
+<li>Crie um <strong>projeto, GPT, Gem ou agente oficial da empresa</strong> com a versão completa das instruções e a política de uso como conhecimento, e compartilhe com os times.</li>
+<li>Peça aos administradores dos planos corporativos que confiram se há instruções ou regras para toda a organização.</li>
+<li>Inclua a configuração no <a href="/guias/piloto-90-dias">piloto de 90 dias</a>, na etapa de fundação.</li>
+</ul>
+<h2 id="fontes">Fontes</h2>
+<ul>
+<li>Anthropic. <em>Understanding Claude&#39;s personalization features</em>: <a href="https://support.claude.com/en/articles/10185728" target="_blank" rel="noopener">https://support.claude.com/en/articles/10185728</a></li>
+<li>Microsoft. <em>Customize how Microsoft 365 Copilot responds to you</em>: <a href="https://support.microsoft.com/en-us/microsoft-365-copilot/customize-how-microsoft-365-copilot-responds-to-you" target="_blank" rel="noopener">https://support.microsoft.com/en-us/microsoft-365-copilot/customize-how-microsoft-365-copilot-responds-to-you</a></li>
+<li>Aumento do limite das instruções personalizadas do ChatGPT para 5.000 caracteres nos planos pagos (julho de 2026): <a href="https://findskill.ai/blog/chatgpt-custom-instructions-5000-characters/" target="_blank" rel="noopener">https://findskill.ai/blog/chatgpt-custom-instructions-5000-characters/</a></li>
+<li>Projetos do ChatGPT e instruções personalizadas: <a href="https://unabyss.com/blog/chatgpt-custom-instructions" target="_blank" rel="noopener">https://unabyss.com/blog/chatgpt-custom-instructions</a></li>
+<li>Gems do Gemini: <a href="https://geotoolbox.ai/blog/gemini-gems" target="_blank" rel="noopener">https://geotoolbox.ai/blog/gemini-gems</a></li>
+<li>Instruções personalizadas do Grok: <a href="https://www.blutrumpet.com/post/grok-custom-instructions-settings-2026" target="_blank" rel="noopener">https://www.blutrumpet.com/post/grok-custom-instructions-settings-2026</a></li>
+<li>Meta. <em>Introducing the Meta AI App</em>: <a href="https://about.fb.com/news/2025/04/introducing-meta-ai-app-new-way-access-ai-assistant/" target="_blank" rel="noopener">https://about.fb.com/news/2025/04/introducing-meta-ai-app-new-way-access-ai-assistant/</a></li>
+<li>Muse, agente da Meta: <a href="https://techcrunch.com/2026/09/08/meta-debuts-its-muse-ai-agent-will-consumers-trust-it/" target="_blank" rel="noopener">https://techcrunch.com/2026/09/08/meta-debuts-its-muse-ai-agent-will-consumers-trust-it/</a></li>
+</ul>
+
+        
+        <div class="chamada">
+          <p>Sua empresa quer usar IA assim? Seja uma das fundadoras da aliança.</p>
+          <a class="btn" href="/#participar">Inscrever minha empresa</a>
+        </div>
+        <p class="fonte-md">Texto aberto sob <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/LICENSE" target="_blank" rel="noopener">CC BY 4.0</a>. <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/guias/configurar-assistentes-de-ia.md" target="_blank" rel="noopener">Ver ou sugerir mudanças no GitHub</a>.</p>
+      </article>
+      <aside class="lateral" aria-label="Navegação do manifesto">
+      <section>
+        <h2>Os oito compromissos</h2>
+        <ol>
+          <li><a href="/compromissos/uso-consciente"><span class="num">1</span>Uso consciente</a></li>
+          <li><a href="/compromissos/uso-frequente-e-medido"><span class="num">2</span>Uso frequente e medido</a></li>
+          <li><a href="/compromissos/produtividade-com-metodo"><span class="num">3</span>Produtividade com método</a></li>
+          <li><a href="/compromissos/a-ia-nao-fala-por-nos"><span class="num">4</span>A IA não fala por nós</a></li>
+          <li><a href="/compromissos/responsabilidade-humana"><span class="num">5</span>Responsabilidade humana</a></li>
+          <li><a href="/compromissos/verificar-antes-de-confiar"><span class="num">6</span>Verificar antes de confiar</a></li>
+          <li><a href="/compromissos/dados-protegidos"><span class="num">7</span>Dados protegidos</a></li>
+          <li><a href="/compromissos/aprender-em-alianca"><span class="num">8</span>Aprender em aliança</a></li>
+        </ol>
+      </section>
+      <section>
+        <h2>Guias</h2>
+        <ul>
+          <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia" aria-current="page">Configurar seu assistente de IA</a></li>
+          <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
+          <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
+          <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
+          <li><a href="/guias/indicadores-adocao-ia">Indicadores comuns da aliança</a></li>
+        </ul>
+      </section>
+    </aside>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap"><hr class="double" style="flex-basis:100%"><span>Aliança IA Consciente · Manifesto, rascunho v0.1 · <a href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">Material aberto no GitHub</a></span><span>Proposta: <a href="https://www.marcosmhs.com.br/" target="_blank" rel="noopener">That Exotic Bug</a></span></div>
+</footer>
+
+<script>
+(function(){
+  // Tema
+  var root = document.documentElement;
+  var btns = document.querySelectorAll('.theme button');
+  function setTheme(t, save){
+    if(t === 'light' || t === 'dark'){ root.setAttribute('data-theme', t); } else { root.removeAttribute('data-theme'); t = 'system'; }
+    btns.forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-t') === t ? 'true' : 'false'); });
+    if(save){ try{ localStorage.setItem('aic-theme', t); }catch(e){} }
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ setTheme(b.getAttribute('data-t'), true); }); });
+  var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
+  setTheme(saved, false);
+
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
+})();
+</script>
+</body>
+</html>

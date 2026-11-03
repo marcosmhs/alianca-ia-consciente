@@ -134,7 +134,7 @@
     </div>
     <div class="layout">
       <article class="prose">
-<h2>Dias 1 a 30: fundação</h2>
+<h2 id="dias-1-a-30-fundacao">Dias 1 a 30: fundação</h2>
 <p><strong>Objetivo:</strong> pessoas, regras e linha de base definidas.</p>
 <ul>
 <li><input disabled="" type="checkbox"> Indicar o representante da empresa no comitê da aliança.</li>
@@ -149,7 +149,7 @@
 <li><input disabled="" type="checkbox"> Registrar a <strong>linha de base</strong> de cada processo antes de mudar qualquer coisa (veja <a href="/guias/indicadores-adocao-ia">Indicadores</a>).</li>
 <li><input disabled="" type="checkbox"> Apresentar o manifesto e o checklist <a href="/guias/antes-de-enviar">Antes de enviar</a> para as pessoas envolvidas.</li>
 </ul>
-<h2>Dias 31 a 60: pilotos</h2>
+<h2 id="dias-31-a-60-pilotos">Dias 31 a 60: pilotos</h2>
 <p><strong>Objetivo:</strong> usar IA de forma recorrente nos processos escolhidos.</p>
 <ul>
 <li><input disabled="" type="checkbox"> Montar o mapa de tarefas de cada time (veja o <a href="/compromissos/uso-consciente">compromisso 1</a>).</li>
@@ -157,7 +157,7 @@
 <li><input disabled="" type="checkbox"> Encontro semanal de 15 minutos dos champions: o que funcionou, o que não funcionou.</li>
 <li><input disabled="" type="checkbox"> Registrar incidentes e erros, sem culpa.</li>
 </ul>
-<h2>Dias 61 a 90: medir e compartilhar</h2>
+<h2 id="dias-61-a-90-medir-e-compartilhar">Dias 61 a 90: medir e compartilhar</h2>
 <p><strong>Objetivo:</strong> comparar com a linha de base e levar o aprendizado para a aliança.</p>
 <ul>
 <li><input disabled="" type="checkbox"> Medir os mesmos indicadores da linha de base.</li>
@@ -166,7 +166,7 @@
 <li><input disabled="" type="checkbox"> Preparar um caso para o encontro trimestral, incluindo o que não funcionou (veja o <a href="/compromissos/aprender-em-alianca">compromisso 8</a>).</li>
 <li><input disabled="" type="checkbox"> Contribuir com pelo menos um fluxo para a biblioteca compartilhada.</li>
 </ul>
-<h2>Exemplo de processos-piloto para times de dados</h2>
+<h2 id="exemplo-de-processos-piloto-para-times-de-dados">Exemplo de processos-piloto para times de dados</h2>
 <div class="table-wrap"><table><thead><tr>
 <th>Processo</th>
 <th>Indicador de resultado</th>
@@ -220,6 +220,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias" aria-current="page">Piloto de 90 dias</a></li>
@@ -249,6 +250,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>

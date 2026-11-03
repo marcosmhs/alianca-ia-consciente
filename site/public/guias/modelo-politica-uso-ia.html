@@ -135,15 +135,15 @@
     <div class="layout">
       <article class="prose">
 <hr>
-<h2>Política de uso de inteligência artificial · [Empresa]</h2>
+<h2 id="politica-de-uso-de-inteligencia-artificial-empresa">Política de uso de inteligência artificial · [Empresa]</h2>
 <p><strong>Versão:</strong> [1.0] · <strong>Vigência:</strong> [data] · <strong>Responsável:</strong> [área]</p>
-<h3>1. Objetivo</h3>
+<h3 id="1-objetivo">1. Objetivo</h3>
 <p>Orientar o uso de ferramentas de inteligência artificial generativa no trabalho, de forma frequente, produtiva, segura e responsável, em linha com os compromissos da Aliança IA Consciente, da qual a [Empresa] é signatária.</p>
-<h3>2. Abrangência</h3>
+<h3 id="2-abrangencia">2. Abrangência</h3>
 <p>Vale para todos os colaboradores, terceiros e estagiários que usam ferramentas de IA em atividades da [Empresa].</p>
-<h3>3. Incentivo ao uso</h3>
+<h3 id="3-incentivo-ao-uso">3. Incentivo ao uso</h3>
 <p>A [Empresa] incentiva o uso de IA no trabalho. Ninguém precisa esconder que usa IA, e o uso aberto é bem-vindo. O uso é avaliado pelo resultado do trabalho, não pela quantidade.</p>
-<h3>4. Ferramentas aprovadas</h3>
+<h3 id="4-ferramentas-aprovadas">4. Ferramentas aprovadas</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>Ferramenta</th>
 <th>Para que usar</th>
@@ -166,7 +166,7 @@
 </tr>
 </tbody></table></div>
 <p>Ferramentas fora desta lista não devem receber dados que não sejam públicos. Para pedir a aprovação de uma ferramenta nova, procure [área/canal].</p>
-<h3>5. Classificação de dados</h3>
+<h3 id="5-classificacao-de-dados">5. Classificação de dados</h3>
 <div class="table-wrap"><table><thead><tr>
 <th>Nível</th>
 <th>Exemplos</th>
@@ -194,22 +194,22 @@
 </tr>
 </tbody></table></div>
 <p><strong>Nunca</strong> devem ir para nenhuma ferramenta de IA: senhas, tokens, chaves de API, credenciais e dados de cartão de pagamento.</p>
-<h3>6. Responsabilidade sobre o conteúdo</h3>
+<h3 id="6-responsabilidade-sobre-o-conteudo">6. Responsabilidade sobre o conteúdo</h3>
 <ul>
 <li>Quem usa a IA é responsável pelo resultado como se o tivesse feito sozinho.</li>
 <li>Fatos, números, referências e código gerados por IA devem ser conferidos antes do uso.</li>
 <li>Conteúdos em que a IA teve papel relevante devem ser sinalizados, conforme o guia <a href="/guias/antes-de-enviar">Antes de enviar</a>.</li>
 <li>Feedback individual, conversas difíceis, reconhecimento e condolências são escritos por pessoas.</li>
 </ul>
-<h3>7. Decisões que afetam pessoas</h3>
+<h3 id="7-decisoes-que-afetam-pessoas">7. Decisões que afetam pessoas</h3>
 <p>A IA pode apoiar, mas não tomar, decisões sobre contratação, avaliação, promoção, desligamento, crédito ou atendimento com impacto relevante a clientes. Toda decisão desse tipo tem um responsável humano nomeado.</p>
-<h3>8. Clientes</h3>
+<h3 id="8-clientes">8. Clientes</h3>
 <p>Quando um cliente interage com um sistema de IA da [Empresa], isso deve estar claro, e deve existir um caminho para atendimento humano.</p>
-<h3>9. Gravações e transcrições</h3>
+<h3 id="9-gravacoes-e-transcricoes">9. Gravações e transcrições</h3>
 <p>Gravar ou transcrever reuniões com IA exige o consentimento dos participantes. Resumos automáticos são revisados por um participante antes de circular.</p>
-<h3>10. Incidentes</h3>
+<h3 id="10-incidentes">10. Incidentes</h3>
 <p>Se dados não permitidos forem compartilhados com uma ferramenta de IA, comunique [canal de segurança] imediatamente. Incidentes são tratados para aprender, não para punir quem reportou.</p>
-<h3>11. Revisão</h3>
+<h3 id="11-revisao">11. Revisão</h3>
 <p>Esta política é revisada a cada [6] meses, ou antes, se as ferramentas ou a legislação mudarem.</p>
 <hr>
 <p><em>Modelo da Aliança IA Consciente. Não substitui orientação jurídica.</em></p>
@@ -239,6 +239,7 @@
         <h2>Guias</h2>
         <ul>
           <li><a href="/guias/modelo-politica-uso-ia" aria-current="page">Modelo de política de uso</a></li>
+          <li><a href="/guias/configurar-ia">Configurar seu assistente de IA</a></li>
           <li><a href="/guias/workslop">O que é workslop e como evitar</a></li>
           <li><a href="/guias/antes-de-enviar">Antes de enviar algo feito com IA</a></li>
           <li><a href="/guias/piloto-90-dias">Piloto de 90 dias</a></li>
@@ -268,6 +269,20 @@
   var saved = 'system'; try{ saved = localStorage.getItem('aic-theme') || 'system'; }catch(e){}
   setTheme(saved, false);
 
+
+  // Botão Copiar nos blocos de texto
+  document.querySelectorAll('.prose pre').forEach(function(pre){
+    var caixa = document.createElement('div'); caixa.className = 'bloco';
+    pre.parentNode.insertBefore(caixa, pre); caixa.appendChild(pre);
+    var b = document.createElement('button'); b.type = 'button'; b.className = 'copiar'; b.textContent = 'Copiar';
+    b.addEventListener('click', function(){
+      var texto = pre.innerText;
+      var ok = function(){ b.textContent = 'Copiado'; setTimeout(function(){ b.textContent = 'Copiar'; }, 1800); };
+      if(navigator.clipboard){ navigator.clipboard.writeText(texto).then(ok, function(){ selecionar(); }); } else { selecionar(); }
+      function selecionar(){ var r = document.createRange(); r.selectNodeContents(pre); var s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Selecionado: Ctrl+C'; }
+    });
+    caixa.appendChild(b);
+  });
 })();
 </script>
 </body>
