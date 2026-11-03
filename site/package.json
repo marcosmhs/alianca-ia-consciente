@@ -4,8 +4,12 @@
   "license": "MIT",
   "description": "Site da Aliança IA Consciente",
   "scripts": {
+    "build": "node build/gerar-paginas.js",
     "test": "firebase emulators:exec --only firestore,functions,hosting --project demo-alianca \"node test/e2e.js && node test/moderacao.js\"",
     "deploy": "firebase deploy --only firestore:rules,functions,hosting"
+  },
+  "dependencies": {
+    "marked": "12.0.2"
   },
   "devDependencies": {
     "firebase-tools": "13.29.1",
