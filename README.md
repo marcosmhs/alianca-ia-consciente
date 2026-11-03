@@ -4,7 +4,7 @@
 
 Um compromisso entre empresas de tecnologia para adotar inteligência artificial com frequência, método e consciência, mantendo as pessoas como autoras do que comunicam e responsáveis pelo que decidem.
 
-Site e inscrição de empresas: **https://alianca-ia-consciente.web.app**
+Site e inscrição de empresas: **https://aliancaiaconsciente.com.br**
 
 ## Comece por aqui
 
@@ -47,7 +47,7 @@ CONTRIBUTING.md     como propor mudanças
 
 ## Como participar
 
-- **Empresas:** façam a inscrição de interesse no [site](https://alianca-ia-consciente.web.app/#participar). As empresas aparecem na lista de signatárias depois que a inscrição é aprovada pelo comitê.
+- **Empresas:** façam a inscrição de interesse no [site](https://aliancaiaconsciente.com.br/#participar). As empresas aparecem na lista de signatárias depois que a inscrição é aprovada pelo comitê.
 - **Pessoas:** sugestões, correções e novos fluxos são bem-vindos. Veja [como contribuir](CONTRIBUTING.md).
 
 ## Status

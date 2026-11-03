@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /moderar
+
+Sitemap: https://aliancaiaconsciente.com.br/sitemap.xml

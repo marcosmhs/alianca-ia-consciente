@@ -55,6 +55,6 @@ Os primeiros 90 dias de cada empresa estão descritos no [Piloto de 90 dias](gui
 
 ## Adesão
 
-A inscrição de interesse é feita em **https://alianca-ia-consciente.web.app**. As empresas aparecem no site depois que a inscrição é aprovada pelo comitê.
+A inscrição de interesse é feita em **https://aliancaiaconsciente.com.br**. As empresas aparecem no site depois que a inscrição é aprovada pelo comitê.
 
 Proposta: That Exotic Bug.

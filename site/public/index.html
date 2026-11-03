@@ -3,11 +3,76 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aliança IA Consciente</title>
-<meta name="description" content="Um compromisso entre empresas de tecnologia para usar IA todos os dias, com método e consciência, sem deixar que ela fale pelas pessoas.">
+<title>Aliança IA Consciente: manifesto para o uso de IA no trabalho</title>
+<meta name="description" content="Oito compromissos para empresas de tecnologia usarem IA generativa todos os dias, com método e consciência, sem deixar que ela fale pelas pessoas.">
+<link rel="canonical" href="https://aliancaiaconsciente.com.br/">
+<meta name="robots" content="index, follow, max-image-preview:large">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Aliança IA Consciente">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://aliancaiaconsciente.com.br/">
 <meta property="og:title" content="Aliança IA Consciente">
 <meta property="og:description" content="Usar IA todos os dias, sem deixar de ser quem assina. Manifesto aberto para adesão de empresas de tecnologia.">
+<meta property="og:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Usar IA todos os dias, sem deixar de ser quem assina. Aliança IA Consciente.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Aliança IA Consciente">
+<meta name="twitter:description" content="Oito compromissos para usar IA no trabalho com frequência, método e consciência.">
+<meta name="twitter:image" content="https://aliancaiaconsciente.com.br/og-image.png">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://aliancaiaconsciente.com.br/#organizacao",
+      "name": "Aliança IA Consciente",
+      "url": "https://aliancaiaconsciente.com.br/",
+      "logo": "https://aliancaiaconsciente.com.br/icon-512.png",
+      "description": "Aliança entre empresas de tecnologia para o uso consciente, frequente e produtivo de inteligência artificial no trabalho.",
+      "sameAs": ["https://github.com/marcosmhs/alianca-ia-consciente"],
+      "founder": { "@type": "Organization", "name": "That Exotic Bug", "url": "https://www.marcosmhs.com.br/" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://aliancaiaconsciente.com.br/#site",
+      "url": "https://aliancaiaconsciente.com.br/",
+      "name": "Aliança IA Consciente",
+      "inLanguage": "pt-BR",
+      "publisher": { "@id": "https://aliancaiaconsciente.com.br/#organizacao" }
+    },
+    {
+      "@type": "CreativeWork",
+      "@id": "https://aliancaiaconsciente.com.br/#manifesto",
+      "name": "Manifesto da Aliança IA Consciente",
+      "headline": "Usar IA todos os dias, sem deixar de ser quem assina.",
+      "url": "https://github.com/marcosmhs/alianca-ia-consciente/blob/main/MANIFESTO.md",
+      "inLanguage": "pt-BR",
+      "datePublished": "2026-11-02",
+      "license": "https://creativecommons.org/licenses/by/4.0/",
+      "author": { "@id": "https://aliancaiaconsciente.com.br/#organizacao" },
+      "keywords": "inteligência artificial, IA generativa, uso responsável de IA, política de uso de IA, produtividade, workslop"
+    }
+  ]
+}
+</script>
+<script>
+  // Quem chega pelo endereço antigo (.web.app) vai para o domínio próprio,
+  // mas só se o domínio já estiver respondendo.
+  (function(){
+    if(!/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) return;
+    var d = 'https://aliancaiaconsciente.com.br';
+    fetch(d + '/robots.txt', { mode: 'no-cors', cache: 'no-store' })
+      .then(function(){ location.replace(d + location.pathname + location.search + location.hash); })
+      .catch(function(){});
+  })();
+</script>
 <script>
   // Aplica o tema salvo antes da pintura, para não piscar
   (function(){ try{ var t = localStorage.getItem('aic-theme'); if(t === 'light' || t === 'dark'){ document.documentElement.setAttribute('data-theme', t); } }catch(e){} })();
@@ -56,16 +121,15 @@ a{color:var(--cyan-text);text-underline-offset:3px}
 .eyebrow{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
 .double{border:0;height:4px;border-top:2px solid var(--ink);border-bottom:1px solid var(--ink);margin:0}
 
-/* Títulos fora de registro */
-.plated{position:relative;display:inline-block}
-.plated .paper{color:var(--paper);text-shadow:.027em .0185em 0 var(--paper),-.0245em -.0175em 0 var(--paper)}
-.plated .plate{position:absolute;inset:0;mix-blend-mode:var(--plate-blend);pointer-events:none;user-select:none}
-.plated .plate-c{color:var(--plate-c)}
-.plated .plate-m{color:var(--plate-m);translate:.018em .0125em}
-.plated .plate-y{color:var(--plate-y);translate:-.0155em -.0115em}
-.plated.num .plate-m{translate:.036em .025em}
-.plated.num .plate-y{translate:-.031em -.023em}
-.plated.num .paper{text-shadow:.036em .025em 0 var(--paper),-.031em -.023em 0 var(--paper)}
+/* Títulos fora de registro: o texto aparece uma única vez no HTML (chapa ciano).
+   As chapas magenta e amarela são desenhadas pelo CSS a partir de data-text,
+   então buscadores e leitores de tela leem o título uma vez só. */
+.plates{position:relative;display:inline-block;color:var(--plate-c)}
+.plates::before,.plates::after{content:attr(data-text);content:attr(data-text) / "";position:absolute;inset:0;mix-blend-mode:var(--plate-blend);pointer-events:none;user-select:none}
+.plates::before{color:var(--plate-m);translate:.018em .0125em}
+.plates::after{color:var(--plate-y);translate:-.0155em -.0115em}
+.plates.num::before{translate:.036em .025em}
+.plates.num::after{translate:-.031em -.023em}
 
 /* Topo */
 .top{position:sticky;top:0;z-index:20;background:var(--paper);padding-top:env(safe-area-inset-top,0px)}
@@ -212,7 +276,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
   <div class="wrap">
     <section class="hero" aria-labelledby="titulo">
       <p class="eyebrow">Manifesto · Rascunho v0.1 · Aberto para adesão</p>
-      <h1 id="titulo">Usar IA todos os dias, <span class="plates">sem deixar de ser quem assina.</span></h1>
+      <h1 id="titulo">Usar IA todos os dias, <span class="plates" data-text="sem deixar de ser quem assina.">sem deixar de ser quem assina.</span></h1>
       <p class="lead">Um compromisso entre empresas de tecnologia para adotar inteligência artificial com frequência, método e consciência, mantendo as pessoas como autoras do que comunicam e responsáveis pelo que decidem.</p>
       <div class="cta">
         <a class="btn" href="#participar">Inscrever minha empresa</a>
@@ -253,19 +317,19 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <div class="commit-group">
         <p class="eyebrow">A base</p>
         <div class="commits">
-          <article class="commit"><div class="n plates num">1</div><div><h3>Uso consciente</h3><p>Usamos IA sabendo onde ela ajuda e onde atrapalha. Pensamos primeiro e usamos a IA depois.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/01-uso-consciente.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">2</div><div><h3>Uso frequente e medido</h3><p>A IA é a primeira ferramenta que consideramos. Medimos o resultado, porque a percepção de ganho engana.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/02-uso-frequente-e-medido.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">3</div><div><h3>Produtividade com método</h3><p>Transformamos bons usos individuais em práticas de time e de aliança.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/03-produtividade-com-metodo.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">4</div><div><h3>A IA não fala por nós</h3><p>A IA é uma ferramenta poderosa de comunicação. A voz, a intenção e a responsabilidade são de quem envia.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/04-a-ia-nao-fala-por-nos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="1">1</div><div><h3>Uso consciente</h3><p>Usamos IA sabendo onde ela ajuda e onde atrapalha. Pensamos primeiro e usamos a IA depois.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/01-uso-consciente.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="2">2</div><div><h3>Uso frequente e medido</h3><p>A IA é a primeira ferramenta que consideramos. Medimos o resultado, porque a percepção de ganho engana.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/02-uso-frequente-e-medido.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="3">3</div><div><h3>Produtividade com método</h3><p>Transformamos bons usos individuais em práticas de time e de aliança.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/03-produtividade-com-metodo.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="4">4</div><div><h3>A IA não fala por nós</h3><p>A IA é uma ferramenta poderosa de comunicação. A voz, a intenção e a responsabilidade são de quem envia.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/04-a-ia-nao-fala-por-nos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
         </div>
       </div>
       <div class="commit-group">
         <p class="eyebrow">A sustentação</p>
         <div class="commits">
-          <article class="commit"><div class="n plates num">5</div><div><h3>Responsabilidade humana</h3><p>A IA recomenda e uma pessoa decide, sobretudo quando a decisão afeta outras pessoas.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/05-responsabilidade-humana.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">6</div><div><h3>Verificar antes de confiar</h3><p>Fatos, números, fontes e código gerados por IA são conferidos antes de serem usados.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/06-verificar-antes-de-confiar.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">7</div><div><h3>Dados protegidos</h3><p>Ferramentas seguras em vez de proibição, e regras claras de dados alinhadas à LGPD.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/07-dados-protegidos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
-          <article class="commit"><div class="n plates num">8</div><div><h3>Aprender em aliança</h3><p>Compartilhamos acertos e erros entre as empresas, porque ninguém aprende IA sozinho.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/08-aprender-em-alianca.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="5">5</div><div><h3>Responsabilidade humana</h3><p>A IA recomenda e uma pessoa decide, sobretudo quando a decisão afeta outras pessoas.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/05-responsabilidade-humana.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="6">6</div><div><h3>Verificar antes de confiar</h3><p>Fatos, números, fontes e código gerados por IA são conferidos antes de serem usados.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/06-verificar-antes-de-confiar.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="7">7</div><div><h3>Dados protegidos</h3><p>Ferramentas seguras em vez de proibição, e regras claras de dados alinhadas à LGPD.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/07-dados-protegidos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num" data-text="8">8</div><div><h3>Aprender em aliança</h3><p>Compartilhamos acertos e erros entre as empresas, porque ninguém aprende IA sozinho.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/08-aprender-em-alianca.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
         </div>
       </div>
     </section>
@@ -330,7 +394,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <div class="two">
         <div>
           <p class="eyebrow">Inscrição de interesse</p>
-          <h2 id="t-form">Quer ser uma das <span class="plates">empresas fundadoras?</span></h2>
+          <h2 id="t-form">Quer ser uma das <span class="plates" data-text="empresas fundadoras?">empresas fundadoras?</span></h2>
         </div>
         <p class="intro">Conte um pouco sobre a sua empresa. O comitê entra em contato para apresentar o manifesto e combinar os próximos passos. A inscrição não cria nenhum compromisso formal.</p>
       </div>
@@ -431,14 +495,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 
 <script>
 (function(){
-  // Chapas C/M/Y nos títulos
-  document.querySelectorAll('.plates').forEach(function(el){
-    var html = el.innerHTML;
-    el.classList.add('plated');
-    el.innerHTML = '<span class="paper">' + html + '</span>' +
-      ['c','m','y'].map(function(k){ return '<span class="plate plate-' + k + '" aria-hidden="true">' + html + '</span>'; }).join('');
-  });
-
   // Tema
   var root = document.documentElement;
   var btns = document.querySelectorAll('.theme button');
