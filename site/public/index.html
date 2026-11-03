@@ -114,6 +114,16 @@ h2{font-weight:600;font-size:clamp(1.9rem,4vw,2.6rem);line-height:1.1;letter-spa
 .commit .n{font-weight:600;font-size:3.6rem;line-height:.9}
 .commit h3{font-weight:600;font-size:1.3rem;line-height:1.2;margin:2px 0 6px}
 .commit p{margin:0;color:var(--muted);font-size:.98rem}
+.more{display:inline-block;margin-top:8px;font-size:.88rem}
+.more::after{content:" →"}
+.guides{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:20px 28px;margin-top:20px}
+.guides a{display:block;text-decoration:none;color:var(--ink);border-top:1px solid var(--rule);padding-top:12px}
+.guides a b{display:block;font-weight:600;font-size:1.05rem}
+.guides a span{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+.guides a:hover b{text-decoration:underline}
+.repo{margin-top:56px;padding-top:16px;border-top:2px solid var(--ink)}
+.repo-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 24px}
+.repo-head h3{font-weight:600;font-size:1.4rem;margin:0}
 @media (max-width:820px){ .commits{grid-template-columns:minmax(0,1fr)} }
 
 /* Antes de enviar */
@@ -188,6 +198,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <a class="link" href="#compromissos">Compromissos</a>
       <a class="link" href="#antes-de-enviar">Antes de enviar</a>
       <a class="link" href="#como-funciona">Como funciona</a>
+      <a class="link" href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">GitHub</a>
       <div class="theme" role="group" aria-label="Tema">
         <button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Escuro</button><button type="button" data-t="system">Sistema</button>
       </div>
@@ -206,6 +217,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <div class="cta">
         <a class="btn" href="#participar">Inscrever minha empresa</a>
         <a class="btn ghost" href="#compromissos">Ler os oito compromissos</a>
+        <a class="btn ghost" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/MANIFESTO.md" target="_blank" rel="noopener">Manifesto completo no GitHub</a>
       </div>
 
       <div class="strip">
@@ -236,24 +248,24 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
     <section id="compromissos" aria-labelledby="t-comp">
       <p class="eyebrow">Os compromissos</p>
       <h2 id="t-comp">Oito compromissos.</h2>
-      <p class="intro">Os quatro primeiros são a base da aliança. Os quatro seguintes os sustentam.</p>
+      <p class="intro">Os quatro primeiros são a base da aliança. Os quatro seguintes os sustentam. Cada um tem um documento aberto, com a evidência que o justifica, o que muda na prática e como começar.</p>
 
       <div class="commit-group">
         <p class="eyebrow">A base</p>
         <div class="commits">
-          <article class="commit"><div class="n plates num">1</div><div><h3>Uso consciente</h3><p>Usamos IA sabendo onde ela ajuda e onde atrapalha. Pensamos primeiro e usamos a IA depois.</p></div></article>
-          <article class="commit"><div class="n plates num">2</div><div><h3>Uso frequente e medido</h3><p>A IA é a primeira ferramenta que consideramos. Medimos o resultado, porque a percepção de ganho engana.</p></div></article>
-          <article class="commit"><div class="n plates num">3</div><div><h3>Produtividade com método</h3><p>Transformamos bons usos individuais em práticas de time e de aliança.</p></div></article>
-          <article class="commit"><div class="n plates num">4</div><div><h3>A IA não fala por nós</h3><p>A IA é uma ferramenta poderosa de comunicação. A voz, a intenção e a responsabilidade são de quem envia.</p></div></article>
+          <article class="commit"><div class="n plates num">1</div><div><h3>Uso consciente</h3><p>Usamos IA sabendo onde ela ajuda e onde atrapalha. Pensamos primeiro e usamos a IA depois.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/01-uso-consciente.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">2</div><div><h3>Uso frequente e medido</h3><p>A IA é a primeira ferramenta que consideramos. Medimos o resultado, porque a percepção de ganho engana.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/02-uso-frequente-e-medido.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">3</div><div><h3>Produtividade com método</h3><p>Transformamos bons usos individuais em práticas de time e de aliança.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/03-produtividade-com-metodo.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">4</div><div><h3>A IA não fala por nós</h3><p>A IA é uma ferramenta poderosa de comunicação. A voz, a intenção e a responsabilidade são de quem envia.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/04-a-ia-nao-fala-por-nos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
         </div>
       </div>
       <div class="commit-group">
         <p class="eyebrow">A sustentação</p>
         <div class="commits">
-          <article class="commit"><div class="n plates num">5</div><div><h3>Responsabilidade humana</h3><p>A IA recomenda e uma pessoa decide, sobretudo quando a decisão afeta outras pessoas.</p></div></article>
-          <article class="commit"><div class="n plates num">6</div><div><h3>Verificar antes de confiar</h3><p>Fatos, números, fontes e código gerados por IA são conferidos antes de serem usados.</p></div></article>
-          <article class="commit"><div class="n plates num">7</div><div><h3>Dados protegidos</h3><p>Ferramentas seguras em vez de proibição, e regras claras de dados alinhadas à LGPD.</p></div></article>
-          <article class="commit"><div class="n plates num">8</div><div><h3>Aprender em aliança</h3><p>Compartilhamos acertos e erros entre as empresas, porque ninguém aprende IA sozinho.</p></div></article>
+          <article class="commit"><div class="n plates num">5</div><div><h3>Responsabilidade humana</h3><p>A IA recomenda e uma pessoa decide, sobretudo quando a decisão afeta outras pessoas.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/05-responsabilidade-humana.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">6</div><div><h3>Verificar antes de confiar</h3><p>Fatos, números, fontes e código gerados por IA são conferidos antes de serem usados.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/06-verificar-antes-de-confiar.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">7</div><div><h3>Dados protegidos</h3><p>Ferramentas seguras em vez de proibição, e regras claras de dados alinhadas à LGPD.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/07-dados-protegidos.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
+          <article class="commit"><div class="n plates num">8</div><div><h3>Aprender em aliança</h3><p>Compartilhamos acertos e erros entre as empresas, porque ninguém aprende IA sozinho.</p><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/compromissos/08-aprender-em-alianca.md" target="_blank" rel="noopener">Ler o compromisso completo</a></div></article>
         </div>
       </div>
     </section>
@@ -264,6 +276,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
           <p class="eyebrow">Compromisso 4 no dia a dia</p>
           <h2 id="t-env">Antes de enviar algo feito com IA</h2>
           <p class="intro">Cinco perguntas para qualquer e-mail, relatório, apresentação ou mensagem escrita com apoio de IA.</p>
+          <a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/guias/antes-de-enviar.md" target="_blank" rel="noopener">Guia completo, com versão para imprimir</a>
         </div>
         <ul class="check">
           <li><span>Eu li tudo e concordo com cada frase?</span></li>
@@ -289,6 +302,15 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
         <div><div class="k">Dias 1 a 30</div><h3>Fundação</h3><ul><li>Adesão das empresas fundadoras</li><li>Comitê formado</li><li>Manifesto v1.0 assinado</li></ul></div>
         <div><div class="k">Dias 31 a 60</div><h3>Pilotos</h3><ul><li>Dois a três processos por empresa</li><li>Champions definidos</li><li>Linha de base dos indicadores</li></ul></div>
         <div><div class="k">Dias 61 a 90</div><h3>Primeiro encontro</h3><ul><li>Casos reais, incluindo os que falharam</li><li>Biblioteca v1 publicada</li><li>Primeiros resultados</li></ul></div>
+      </div>
+      <div class="repo">
+        <div class="repo-head"><h3>Guias para as empresas</h3><a class="more" href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">Ver tudo no GitHub</a></div>
+        <div class="guides">
+          <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/guias/piloto-90-dias.md" target="_blank" rel="noopener"><b>Piloto de 90 dias</b><span>Roteiro para quem acaba de entrar na aliança.</span></a>
+          <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/guias/indicadores.md" target="_blank" rel="noopener"><b>Indicadores comuns</b><span>O que cada empresa mede e reporta por trimestre.</span></a>
+          <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/guias/politica-de-uso-modelo.md" target="_blank" rel="noopener"><b>Modelo de política de uso</b><span>Para adaptar e publicar internamente.</span></a>
+          <a href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener"><b>Como contribuir</b><span>Correções, novas evidências e fluxos de IA testados.</span></a>
+        </div>
       </div>
     </section>
 
@@ -404,7 +426,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 </main>
 
 <footer>
-  <div class="wrap"><hr class="double" style="flex-basis:100%"><span>Aliança IA Consciente · Manifesto, rascunho v0.1</span><span>Proposta: <a href="https://www.marcosmhs.com.br/" target="_blank" rel="noopener">That Exotic Bug</a></span></div>
+  <div class="wrap"><hr class="double" style="flex-basis:100%"><span>Aliança IA Consciente · Manifesto, rascunho v0.1 · <a href="https://github.com/marcosmhs/alianca-ia-consciente" target="_blank" rel="noopener">Material aberto no GitHub</a></span><span>Proposta: <a href="https://www.marcosmhs.com.br/" target="_blank" rel="noopener">That Exotic Bug</a></span></div>
 </footer>
 
 <script>
