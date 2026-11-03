@@ -1,6 +1,6 @@
 # Manifesto da Aliança IA Consciente
 
-**Usar IA todos os dias, sem deixar de ser quem assina.**
+**A IA sugere. Você decide.**
 
 Rascunho v0.1 · Novembro de 2026 · Aberto para adesão
 

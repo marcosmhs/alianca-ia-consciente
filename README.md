@@ -1,6 +1,6 @@
 # Aliança IA Consciente
 
-**Usar IA todos os dias, sem deixar de ser quem assina.**
+**A IA sugere. Você decide.**
 
 Um compromisso entre empresas de tecnologia para adotar inteligência artificial com frequência, método e consciência, mantendo as pessoas como autoras do que comunicam e responsáveis pelo que decidem.
 
