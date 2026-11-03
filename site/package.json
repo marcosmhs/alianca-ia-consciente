@@ -1,0 +1,15 @@
+{
+  "name": "alianca-site",
+  "private": true,
+  "description": "Site da Aliança IA Consciente",
+  "scripts": {
+    "test": "firebase emulators:exec --only firestore,functions,hosting --project demo-alianca \"node test/e2e.js && node test/moderacao.js\"",
+    "deploy": "firebase deploy --only firestore:rules,functions,hosting"
+  },
+  "devDependencies": {
+    "firebase-tools": "13.29.1",
+    "mailparser": "3.7.1",
+    "playwright": "1.48.2",
+    "smtp-server": "3.13.6"
+  }
+}

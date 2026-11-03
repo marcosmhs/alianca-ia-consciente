@@ -1,0 +1,10 @@
+node_modules/
+*.log
+.firebase/
+.firebaserc
+site/functions/.env
+site/functions/.env.local
+site/functions/.secret.local
+site/test/*.png
+site/test/*.html
+.DS_Store

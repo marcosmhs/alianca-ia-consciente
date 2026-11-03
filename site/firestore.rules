@@ -1,0 +1,51 @@
+rules_version = '2';
+
+// Aliança IA Consciente: formulário de interesse.
+// Qualquer visitante pode CRIAR uma inscrição válida.
+// Ninguém lê, altera ou apaga pelo site. As inscrições são lidas no Console do Firebase.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function texto(v, min, max) {
+      return v is string && v.size() >= min && v.size() <= max;
+    }
+
+    function inscricaoValida(d) {
+      return d.keys().hasAll(['empresa', 'setor', 'porte', 'nome', 'cargo', 'email',
+                              'participacao', 'pilotos', 'consentimento', 'criadoEm'])
+        && d.keys().hasOnly(['empresa', 'site', 'setor', 'porte', 'nome', 'cargo', 'email',
+                             'telefone', 'participacao', 'pilotos', 'mensagem',
+                             'consentimento', 'criadoEm', 'origem'])
+        && texto(d.empresa, 2, 120)
+        && (!('site' in d) || texto(d.site, 0, 200))
+        && d.setor in ['tecnologia', 'marketplace', 'fintech', 'mobilidade', 'servicos', 'outro']
+        && d.porte in ['ate-50', '51-200', '201-1000', '1001-5000', 'mais-5000']
+        && texto(d.nome, 2, 120)
+        && texto(d.cargo, 2, 120)
+        && texto(d.email, 6, 160)
+        && d.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && (!('telefone' in d) || texto(d.telefone, 0, 40))
+        && d.participacao in ['fundadora', 'signataria', 'acompanhar']
+        && d.pilotos is list && d.pilotos.size() <= 8
+        && (!('mensagem' in d) || texto(d.mensagem, 0, 2000))
+        && (!('origem' in d) || texto(d.origem, 0, 200))
+        && d.consentimento == true
+        && d.criadoEm == request.time;
+    }
+
+    match /interesse/{id} {
+      allow create: if inscricaoValida(request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    // Empresas aprovadas: leitura pública; só a função de moderação escreve
+    match /signatarias/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
