@@ -58,6 +58,11 @@ Rascunho v0.1, aberto para comentários das empresas fundadoras. A versão 1.0 s
 
 Coerente com o [compromisso 4](compromissos/04-a-ia-nao-fala-por-nos.md): este material foi rascunhado com apoio de IA (Claude, da Anthropic), a partir de pesquisas citadas em cada documento, e está em revisão humana pela proponente antes da versão 1.0.
 
+## Licença
+
+- **Documentos** (manifesto, compromissos, guias e demais textos): [Creative Commons Atribuição 4.0 Internacional (CC BY 4.0)](LICENSE). Você pode copiar, adaptar e redistribuir, inclusive para uso comercial, desde que dê o crédito: *"Aliança IA Consciente, https://github.com/marcosmhs/alianca-ia-consciente, CC BY 4.0"*, e indique se fez alterações.
+- **Código do site** (pasta [`site/`](site/)): [MIT](site/LICENSE).
+
 ---
 
 Proposta: [That Exotic Bug](https://www.marcosmhs.com.br/).

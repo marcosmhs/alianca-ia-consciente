@@ -67,3 +67,7 @@ npm test
 ```
 
 Os testes cobrem as regras do Firestore, o formulário no navegador, o e-mail de aviso e o fluxo de aprovação, incluindo links adulterados.
+
+## Licença
+
+[MIT](LICENSE). Os documentos da aliança, fora desta pasta, estão sob [CC BY 4.0](../LICENSE).
