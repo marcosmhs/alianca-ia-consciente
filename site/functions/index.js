@@ -1,4 +1,4 @@
-// Aliança IA Consciente: aviso por e-mail a cada inscrição e aprovação das empresas que aparecem no site.
+// Aliança IA Consciente: avisos por e-mail, contador de assinaturas e aprovação dos apoiadores exibidos no site.
 const { onDocumentCreated } = require("firebase-functions/v2/firestore");
 const { onRequest } = require("firebase-functions/v2/https");
 const { defineSecret, defineString } = require("firebase-functions/params");
@@ -39,98 +39,132 @@ const ROTULOS = {
     dados: "Dados e analytics", engenharia: "Engenharia de software", produto: "Produto e design",
     atendimento: "Atendimento ao cliente", comercial: "Comercial e marketing", pessoas: "Pessoas e RH",
   },
+  apoio: {
+    incentivar: "Incentivar na empresa onde trabalha", divulgar: "Divulgar a aliança",
+  },
 };
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const rot = (grupo, v) => ROTULOS[grupo][v] || v || "";
 const siteBase = () => (SITE_URL.value() || `https://${process.env.GCLOUD_PROJECT}.web.app`).replace(/\/+$/, "");
+const dataHora = (ts) => (ts?.toDate ? ts.toDate() : new Date()).toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
 
 // Links de moderação assinados: só quem recebe o e-mail consegue aprovar
 const ACOES = ["aprovar", "recusar", "remover"];
-const assinar = (id, acao) =>
-  crypto.createHmac("sha256", MODERACAO_SECRET.value()).update(`${id}:${acao}`).digest("hex").slice(0, 40);
-const tokenValido = (id, acao, t) => {
-  const esperado = Buffer.from(assinar(id, acao));
+const assinar = (tipo, id, acao) =>
+  crypto.createHmac("sha256", MODERACAO_SECRET.value()).update(`${tipo}:${id}:${acao}`).digest("hex").slice(0, 40);
+const tokenValido = (tipo, id, acao, t) => {
+  const esperado = Buffer.from(assinar(tipo, id, acao));
   const recebido = Buffer.from(String(t || ""));
   return recebido.length === esperado.length && crypto.timingSafeEqual(recebido, esperado);
 };
-const linkModeracao = (id, acao) =>
-  `${siteBase()}/moderar?id=${encodeURIComponent(id)}&acao=${acao}&t=${assinar(id, acao)}`;
+const linkModeracao = (tipo, id, acao) =>
+  `${siteBase()}/moderar?tipo=${tipo}&id=${encodeURIComponent(id)}&acao=${acao}&t=${assinar(tipo, id, acao)}`;
 
-// 1. Aviso por e-mail a cada nova inscrição
+// E-mail
+const tabela = (linhas) => `<table style="border-collapse:collapse;width:100%;font-size:15px">
+    ${linhas.map(([k, v]) => `<tr><td style="padding:6px 12px 6px 0;color:#7d7979;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:6px 0;border-bottom:1px solid #eae7e7">${esc(v).replace(/\n/g, "<br>")}</td></tr>`).join("\n    ")}
+  </table>`;
+const botao = (href, rotulo, cheio) =>
+  `<a href="${esc(href)}" style="display:inline-block;padding:10px 18px;border-radius:2px;font-weight:600;text-decoration:none;${cheio ? "background:#0088b0;color:#ffffff;border:1px solid #0088b0" : "background:#ffffff;color:#201e1d;border:1px solid #bab6b6"}">${rotulo}</a>`;
+const moldura = (titulo, corpo) => `<div style="font-family:Georgia,serif;color:#201e1d;max-width:560px">
+  <p style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7d7979;margin:0 0 4px">Aliança IA Consciente</p>
+  <h2 style="font-weight:600;margin:0 0 16px">${titulo}</h2>
+  ${corpo}
+</div>`;
+
+async function enviarEmail({ assunto, texto, html, replyTo }) {
+  const transporte = nodemailer.createTransport({
+    host: SMTP_HOST.value(),
+    port: Number(SMTP_PORT.value()),
+    secure: Number(SMTP_PORT.value()) === 465,
+    auth: { user: EMAIL_REMETENTE.value(), pass: GMAIL_APP_PASSWORD.value() },
+  });
+  await transporte.sendMail({
+    from: `"Aliança IA Consciente" <${EMAIL_REMETENTE.value()}>`,
+    to: EMAIL_DESTINOS.value(),
+    replyTo,
+    subject: assunto,
+    text: texto,
+    html,
+  });
+}
+const responderPara = (nome, email) => (email ? `"${String(nome || "").replace(/"/g, "")}" <${email}>` : undefined);
+
+// 1. Cada inscrição de empresa: soma no contador e avisa por e-mail
 exports.avisarNovaInscricao = onDocumentCreated(
-  {
-    document: "interesse/{id}",
-    region: REGIAO,
-    secrets: [GMAIL_APP_PASSWORD, MODERACAO_SECRET],
-    maxInstances: 2,
-    memory: "256MiB",
-  },
+  { document: "interesse/{id}", region: REGIAO, secrets: [GMAIL_APP_PASSWORD], maxInstances: 2, memory: "256MiB" },
   async (event) => {
     const d = event.data?.data();
     if (!d) return;
     const id = event.params.id;
-    const projeto = process.env.GCLOUD_PROJECT || "";
-
-    const quando = d.criadoEm?.toDate ? d.criadoEm.toDate() : new Date();
-    const dataHora = quando.toLocaleString("pt-BR", { timeZone: "America/Sao_Paulo" });
+    await db.collection("contadores").doc("assinaturas").set({ empresas: FieldValue.increment(1), atualizadoEm: FieldValue.serverTimestamp() }, { merge: true });
+    const linkConsole = `https://console.firebase.google.com/project/${process.env.GCLOUD_PROJECT}/firestore/data/~2Finteresse~2F${id}`;
     const pilotos = (d.pilotos || []).map((p) => rot("pilotos", p)).join(", ") || "Nenhuma";
-    const linkConsole = `https://console.firebase.google.com/project/${projeto}/firestore/data/~2Finteresse~2F${id}`;
-    const linkAprovar = linkModeracao(id, "aprovar");
-    const linkRecusar = linkModeracao(id, "recusar");
-
     const linhas = [
       ["Empresa", d.empresa], ["Site", d.site], ["Setor", rot("setor", d.setor)],
       ["Colaboradores", rot("porte", d.porte)], ["Participação", rot("participacao", d.participacao)],
       ["Áreas de piloto", pilotos], ["Contato", d.nome], ["Cargo", d.cargo],
       ["E-mail", d.email], ["Telefone", d.telefone], ["Mensagem", d.mensagem],
-      ["Recebida em", dataHora],
+      ["Recebida em", dataHora(d.criadoEm)],
     ].filter(([, v]) => v);
 
-    const texto = [
-      `Nova inscrição na Aliança IA Consciente`, "",
-      ...linhas.map(([k, v]) => `${k}: ${v}`), "",
-      `A empresa só aparece no site depois de aprovada.`,
-      `Aprovar e publicar no site: ${linkAprovar}`,
-      `Recusar: ${linkRecusar}`, "",
-      `Ver no Firebase: ${linkConsole}`,
-    ].join("\n");
-
-    const botao = (href, rotulo, cheio) =>
-      `<a href="${esc(href)}" style="display:inline-block;padding:10px 18px;border-radius:2px;font-weight:600;text-decoration:none;${cheio ? "background:#0088b0;color:#ffffff;border:1px solid #0088b0" : "background:#ffffff;color:#201e1d;border:1px solid #bab6b6"}">${rotulo}</a>`;
-
-    const html = `<div style="font-family:Georgia,serif;color:#201e1d;max-width:560px">
-  <p style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#7d7979;margin:0 0 4px">Aliança IA Consciente</p>
-  <h2 style="font-weight:600;margin:0 0 16px">Nova inscrição: ${esc(d.empresa)}</h2>
-  <table style="border-collapse:collapse;width:100%;font-size:15px">
-    ${linhas.map(([k, v]) => `<tr><td style="padding:6px 12px 6px 0;color:#7d7979;vertical-align:top;white-space:nowrap">${esc(k)}</td><td style="padding:6px 0;border-bottom:1px solid #eae7e7">${esc(v).replace(/\n/g, "<br>")}</td></tr>`).join("\n    ")}
-  </table>
-  <p style="margin:24px 0 10px;font-size:14px">A empresa só aparece no site depois de aprovada.</p>
-  <p style="margin:0">${botao(linkAprovar, "Aprovar e publicar no site", true)}&nbsp;&nbsp;${botao(linkRecusar, "Recusar", false)}</p>
+    await enviarEmail({
+      assunto: `Nova inscrição de empresa: ${d.empresa} (${rot("participacao", d.participacao)})`,
+      replyTo: responderPara(d.nome, d.email),
+      texto: [`Nova inscrição de empresa na Aliança IA Consciente`, "", ...linhas.map(([k, v]) => `${k}: ${v}`), "", `Ver no Firebase: ${linkConsole}`].join("\n"),
+      html: moldura(`Nova inscrição de empresa: ${esc(d.empresa)}`, `${tabela(linhas)}
   <p style="margin:20px 0 0"><a href="${esc(linkConsole)}" style="color:#0088b0">Ver a inscrição no Firebase</a></p>
-  <p style="font-size:12px;color:#7d7979;margin:16px 0 0">Responda este e-mail para falar direto com ${esc(d.nome)}.</p>
-</div>`;
-
-    const transporte = nodemailer.createTransport({
-      host: SMTP_HOST.value(),
-      port: Number(SMTP_PORT.value()),
-      secure: Number(SMTP_PORT.value()) === 465,
-      auth: { user: EMAIL_REMETENTE.value(), pass: GMAIL_APP_PASSWORD.value() },
+  <p style="font-size:12px;color:#7d7979;margin:16px 0 0">Responda este e-mail para falar direto com ${esc(d.nome)}.</p>`),
     });
-
-    await transporte.sendMail({
-      from: `"Aliança IA Consciente" <${EMAIL_REMETENTE.value()}>`,
-      to: EMAIL_DESTINOS.value(),
-      replyTo: d.email ? `"${String(d.nome || "").replace(/"/g, "")}" <${d.email}>` : undefined,
-      subject: `Nova inscrição: ${d.empresa} (${rot("participacao", d.participacao)})`,
-      text: texto,
-      html,
-    });
-    logger.info("Aviso enviado", { id, empresa: d.empresa });
+    logger.info("Aviso de empresa enviado", { id, empresa: d.empresa });
   }
 );
 
-// 2. Página de moderação: GET mostra a confirmação, POST executa a ação
+// 2. Cada assinatura de pessoa: soma no contador e, se a pessoa quis aparecer no site, pede aprovação
+exports.registrarAssinatura = onDocumentCreated(
+  { document: "assinaturas/{id}", region: REGIAO, secrets: [GMAIL_APP_PASSWORD, MODERACAO_SECRET], maxInstances: 5, memory: "256MiB" },
+  async (event) => {
+    const d = event.data?.data();
+    if (!d) return;
+    const id = event.params.id;
+
+    const incrementos = { total: FieldValue.increment(1), atualizadoEm: FieldValue.serverTimestamp() };
+    for (const a of d.apoio || []) if (a === "incentivar" || a === "divulgar") incrementos[a] = FieldValue.increment(1);
+    await db.collection("contadores").doc("assinaturas").set(incrementos, { merge: true });
+
+    if (!d.publico) {
+      logger.info("Assinatura registrada (sem nome público)", { id });
+      return;
+    }
+
+    const linhas = [
+      ["Nome", d.nome], ["Cargo ou área", d.cargo], ["E-mail", d.email],
+      ["Como quer apoiar", (d.apoio || []).map((a) => rot("apoio", a)).join(" e ")],
+      ["Assinou em", dataHora(d.criadoEm)],
+    ].filter(([, v]) => v);
+    const aprovar = linkModeracao("pessoa", id, "aprovar");
+    const recusar = linkModeracao("pessoa", id, "recusar");
+
+    await enviarEmail({
+      assunto: `Nova assinatura para aprovar: ${d.nome}`,
+      replyTo: responderPara(d.nome, d.email),
+      texto: [
+        `Nova assinatura do manifesto, com pedido para aparecer no site`, "",
+        ...linhas.map(([k, v]) => `${k}: ${v}`), "",
+        `No site aparecem só o nome e o cargo ou área.`,
+        `Aprovar e mostrar no site: ${aprovar}`,
+        `Recusar: ${recusar}`,
+      ].join("\n"),
+      html: moldura(`Nova assinatura: ${esc(d.nome)}`, `${tabela(linhas)}
+  <p style="margin:24px 0 10px;font-size:14px">No site aparecem só o nome e o cargo ou área.</p>
+  <p style="margin:0">${botao(aprovar, "Aprovar e mostrar no site", true)}&nbsp;&nbsp;${botao(recusar, "Recusar", false)}</p>`),
+    });
+    logger.info("Assinatura pública aguardando aprovação", { id });
+  }
+);
+
+// 3. Página de moderação: GET mostra a confirmação, POST executa a ação
 function pagina(res, status, titulo, corpo) {
   res.status(status)
     .set("Cache-Control", "private, no-store")
@@ -157,65 +191,73 @@ button,.btn{font:inherit;font-weight:600;font-size:.95rem;padding:10px 18px;bord
 </style></head><body><main><p class="eyebrow">Aliança IA Consciente · Moderação</p><h1>${esc(titulo)}</h1><hr>${corpo}</main></body></html>`);
 }
 
-const formAcao = (id, acao, rotulo, cheio) =>
-  `<form method="post" action="/moderar"><input type="hidden" name="id" value="${esc(id)}"><input type="hidden" name="acao" value="${acao}"><input type="hidden" name="t" value="${assinar(id, acao)}"><button class="${cheio ? "primary" : "ghost"}" type="submit">${rotulo}</button></form>`;
+const formAcao = (tipo, id, acao, rotulo, cheio) =>
+  `<form method="post" action="/moderar"><input type="hidden" name="tipo" value="${tipo}"><input type="hidden" name="id" value="${esc(id)}"><input type="hidden" name="acao" value="${acao}"><input type="hidden" name="t" value="${assinar(tipo, id, acao)}"><button class="${cheio ? "primary" : "ghost"}" type="submit">${rotulo}</button></form>`;
 
 exports.moderarInscricao = onRequest(
   { region: REGIAO, secrets: [MODERACAO_SECRET], invoker: "public", maxInstances: 2, memory: "256MiB" },
   async (req, res) => {
     if (req.method !== "GET" && req.method !== "POST") return pagina(res, 405, "Método não permitido", "");
     const p = req.method === "POST" ? req.body || {} : req.query;
+    const tipo = String(p.tipo || "");
     const id = String(p.id || "");
     const acao = String(p.acao || "");
 
-    if (!/^[A-Za-z0-9_-]{1,64}$/.test(id) || !ACOES.includes(acao) || !tokenValido(id, acao, p.t)) {
-      return pagina(res, 403, "Link inválido", `<p class="err">Este link de moderação não é válido. Use o link do e-mail de aviso da inscrição.</p>`);
+    // Links antigos, de quando as empresas aprovadas apareciam no site
+    if (!tipo) {
+      return pagina(res, 410, "Link antigo", `<p>As empresas não são mais listadas no site, então não há nada a aprovar por este link. A inscrição continua guardada no Firebase.</p><p><a href="/">Ir para o site</a></p>`);
     }
 
-    const refInscricao = db.collection("interesse").doc(id);
-    const refPublica = db.collection("signatarias").doc(id);
-    const snap = await refInscricao.get();
-    if (!snap.exists) return pagina(res, 404, "Inscrição não encontrada", `<p>Esta inscrição não existe mais no banco.</p>`);
+    if (tipo !== "pessoa" || !/^[a-f0-9]{64}$/.test(id) || !ACOES.includes(acao) || !tokenValido(tipo, id, acao, p.t)) {
+      return pagina(res, 403, "Link inválido", `<p class="err">Este link de moderação não é válido. Use o link do e-mail de aviso da assinatura.</p>`);
+    }
+
+    const refAssinatura = db.collection("assinaturas").doc(id);
+    const refPublica = db.collection("apoiadores").doc(id);
+    const snap = await refAssinatura.get();
+    if (!snap.exists) return pagina(res, 404, "Assinatura não encontrada", `<p>Esta assinatura não existe mais no banco.</p>`);
     const d = snap.data();
     const publicada = (await refPublica.get()).exists;
-    const situacao = publicada ? "Publicada no site" : d.status === "recusada" ? "Recusada" : d.status === "removida" ? "Removida do site" : "Aguardando aprovação";
-    const categoria = d.participacao === "fundadora" ? "fundadora" : "signataria";
+    const situacao = publicada ? "Aparece no site" : d.status === "recusada" ? "Recusada" : d.status === "removida" ? "Removida do site" : "Aguardando aprovação";
 
     const resumo = `<dl>
-<dt>Empresa</dt><dd>${esc(d.empresa)}</dd>
-${d.site ? `<dt>Site</dt><dd>${esc(d.site)}</dd>` : ""}
-<dt>Participação</dt><dd>${esc(rot("participacao", d.participacao))}</dd>
-<dt>Contato</dt><dd>${esc(d.nome)} · ${esc(d.cargo)}</dd>
+<dt>Nome</dt><dd>${esc(d.nome)}</dd>
+${d.cargo ? `<dt>Cargo ou área</dt><dd>${esc(d.cargo)}</dd>` : ""}
 <dt>E-mail</dt><dd>${esc(d.email)}</dd>
+<dt>Como quer apoiar</dt><dd>${esc((d.apoio || []).map((a) => rot("apoio", a)).join(" e "))}</dd>
 <dt>Situação</dt><dd>${esc(situacao)}</dd>
 </dl>`;
 
     if (req.method === "GET") {
       if (acao === "aprovar" && publicada) {
-        return pagina(res, 200, "Esta empresa já está no site", resumo + `<div class="acoes"><a class="btn ghost" href="/#signatarias">Ver no site</a>${formAcao(id, "remover", "Remover do site", false)}</div>`);
+        return pagina(res, 200, "Esta pessoa já aparece no site", resumo + `<div class="acoes"><a class="btn ghost" href="/#apoiadores">Ver no site</a>${formAcao(tipo, id, "remover", "Remover do site", false)}</div>`);
+      }
+      if (acao === "aprovar" && !d.publico) {
+        return pagina(res, 200, "Esta pessoa não pediu para aparecer no site", resumo + `<p>A assinatura conta no total, mas o nome não é exibido.</p>`);
       }
       const textos = {
-        aprovar: ["Aprovar e publicar no site?", `O nome da empresa aparecerá na seção de signatárias como <strong>${categoria === "fundadora" ? "Empresa fundadora" : "Empresa signatária"}</strong>.${d.participacao === "acompanhar" ? " Esta empresa pediu só para acompanhar." : ""}`, "Aprovar e publicar"],
-        recusar: ["Recusar esta inscrição?", "A empresa não aparecerá no site. A inscrição continua guardada no Firebase.", "Recusar inscrição"],
-        remover: ["Remover a empresa do site?", "O nome deixará de aparecer na seção de signatárias.", "Remover do site"],
+        aprovar: ["Mostrar esta pessoa no site?", "O nome e o cargo ou área aparecerão na lista de apoiadores. O e-mail nunca é exibido.", "Aprovar e mostrar"],
+        recusar: ["Recusar esta assinatura?", "O nome não aparecerá no site. A assinatura continua contando no total.", "Recusar"],
+        remover: ["Remover esta pessoa do site?", "O nome deixará de aparecer na lista de apoiadores. A assinatura continua contando no total.", "Remover do site"],
       }[acao];
-      return pagina(res, 200, textos[0], resumo + `<p>${textos[1]}</p><div class="acoes">${formAcao(id, acao, textos[2], acao === "aprovar")}</div>`);
+      return pagina(res, 200, textos[0], resumo + `<p>${textos[1]}</p><div class="acoes">${formAcao(tipo, id, acao, textos[2], acao === "aprovar")}</div>`);
     }
 
     // POST: executa a ação
     const agora = FieldValue.serverTimestamp();
     if (acao === "aprovar") {
-      const publico = { empresa: d.empresa, categoria, aprovadaEm: agora };
-      if (d.site && /^https?:\/\//i.test(d.site)) publico.site = d.site;
+      if (!d.publico) return pagina(res, 409, "Não é possível mostrar", `<p>Esta pessoa não autorizou mostrar o nome no site.</p>`);
+      const publico = { nome: d.nome, aprovadoEm: agora };
+      if (d.cargo) publico.cargo = d.cargo;
       await refPublica.set(publico);
-      await refInscricao.update({ status: "aprovada", moderadaEm: agora });
-      logger.info("Empresa aprovada", { id, empresa: d.empresa });
-      return pagina(res, 200, "Empresa aprovada", `<p>${esc(d.empresa)} agora aparece no site.</p><div class="acoes"><a class="btn primary" href="/#signatarias">Ver no site</a>${formAcao(id, "remover", "Desfazer e remover", false)}</div>`);
+      await refAssinatura.update({ status: "aprovada", moderadaEm: agora });
+      logger.info("Apoiador aprovado", { id });
+      return pagina(res, 200, "Apoiador aprovado", `<p>${esc(d.nome)} agora aparece no site.</p><div class="acoes"><a class="btn primary" href="/#apoiadores">Ver no site</a>${formAcao(tipo, id, "remover", "Desfazer e remover", false)}</div>`);
     }
     await refPublica.delete();
-    await refInscricao.update({ status: acao === "recusar" ? "recusada" : "removida", moderadaEm: agora });
-    logger.info(acao === "recusar" ? "Inscrição recusada" : "Empresa removida", { id, empresa: d.empresa });
-    return pagina(res, 200, acao === "recusar" ? "Inscrição recusada" : "Empresa removida do site",
-      `<p>${esc(d.empresa)} não aparece no site.</p><div class="acoes">${formAcao(id, "aprovar", "Aprovar mesmo assim", false)}</div>`);
+    await refAssinatura.update({ status: acao === "recusar" ? "recusada" : "removida", moderadaEm: agora });
+    logger.info(acao === "recusar" ? "Assinatura recusada" : "Apoiador removido", { id });
+    return pagina(res, 200, acao === "recusar" ? "Assinatura recusada" : "Apoiador removido do site",
+      `<p>${esc(d.nome)} não aparece no site. A assinatura continua contando no total.</p>${d.publico ? `<div class="acoes">${formAcao(tipo, id, "aprovar", "Aprovar mesmo assim", false)}</div>` : ""}`);
   }
 );

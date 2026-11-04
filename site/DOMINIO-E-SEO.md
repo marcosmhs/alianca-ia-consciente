@@ -102,7 +102,7 @@ A página inicial aponta para essas páginas, e o `sitemap.xml` lista os 14 ende
 
 ### Contínuo: autoridade
 
-1. Selo de signatária com link para o site, para as empresas aprovadas colocarem na própria página.
+1. Incentivo para quem assina divulgar: botões de compartilhar no LinkedIn e no WhatsApp logo depois da assinatura, e um selo "Apoio a Aliança IA Consciente" para perfis e sites pessoais.
 2. Links nos canais da proponente: site da That Exotic Bug, LinkedIn e perfil do GitHub.
 3. Artigos no LinkedIn, um por compromisso, com link para a página do compromisso.
 4. Pauta para imprensa e associações de tecnologia e comunidades de dados.

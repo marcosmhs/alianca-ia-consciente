@@ -2,18 +2,20 @@
 
 Domínio, Search Console e plano de SEO: veja [DOMINIO-E-SEO.md](DOMINIO-E-SEO.md).
 
-Página única com o manifesto, o formulário de interesse e a lista de empresas signatárias. Publicado em https://aliancaiaconsciente.com.br.
+Página inicial com o manifesto, a assinatura de pessoas (com contador e lista de apoiadores) e a inscrição de empresas, mais as páginas dos compromissos e dos guias. Publicado em https://aliancaiaconsciente.com.br.
 
 ## Como funciona
 
 | Parte | Arquivo | O que faz |
 |---|---|---|
 | Página | `public/index.html` | HTML, CSS e JS sem build. Tema claro, escuro ou do sistema |
-| Inscrições | `firestore.rules` | Qualquer visitante pode **criar** uma inscrição válida na coleção `interesse`. Ninguém lê, altera ou apaga pelo site |
-| Lista pública | `firestore.rules` | A coleção `signatarias` tem leitura pública e só é escrita pelas funções |
+| Assinaturas de pessoas | `firestore.rules` | Qualquer visitante pode **criar** uma assinatura na coleção `assinaturas`. O id é o SHA-256 do e-mail, então cada e-mail assina uma única vez. Ninguém lê pelo site |
+| Contador e apoiadores | `firestore.rules` | `contadores/assinaturas` e `apoiadores` têm leitura pública e só são escritos pelas funções |
+| Contador e aviso | `functions/index.js` → `registrarAssinatura` | Soma cada assinatura no contador. Se a pessoa pediu para aparecer no site, envia um e-mail com Aprovar e Recusar |
+| Exibição do contador | `public/index.html` → `MINIMO_PARA_MOSTRAR` | O site só mostra o contador quando pessoas + empresas somam pelo menos 500. Antes disso, aparece o convite para assinar. As inscrições de empresas também entram no contador (campo `empresas`) |
+| Aprovação | `functions/index.js` → `moderarInscricao` | Página em `/moderar` que mostra ou retira o nome da lista de apoiadores. Os links são assinados (HMAC) e a ação só acontece no clique de confirmação (POST) |
+| Inscrições de empresas | `firestore.rules` e `functions/index.js` → `avisarNovaInscricao` | Coleção privada `interesse`. Cada inscrição gera um e-mail de aviso. As empresas não são listadas no site |
 | Páginas de conteúdo | `build/gerar-paginas.js` | Gera `public/compromissos/*.html`, `public/guias/*.html`, `public/assets/paginas.css` e `public/sitemap.xml` a partir dos `.md` do repositório |
-| Aviso por e-mail | `functions/index.js` → `avisarNovaInscricao` | A cada inscrição, envia um e-mail com os botões Aprovar e Recusar |
-| Aprovação | `functions/index.js` → `moderarInscricao` | Página em `/moderar` que publica ou retira a empresa da lista. Os links são assinados (HMAC) e a ação só acontece no clique de confirmação (POST) |
 
 ## Configuração
 
