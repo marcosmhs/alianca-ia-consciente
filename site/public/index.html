@@ -597,14 +597,21 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
   function formatar(n){ return Number(n).toLocaleString('pt-BR'); }
 
   // Contador e apoiadores aprovados (coleções públicas "contadores" e "apoiadores")
+  var MINIMO_PARA_MOSTRAR = 500;
   function carregarApoio(){
     config().then(function(c){
       fetch(urlColecao(c, 'contadores/assinaturas')).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
-        var total = d ? Number(lerCampo(d.fields, 'total') || 0) : 0;
-        if(!total) return;
+        var pessoas = d ? Number(lerCampo(d.fields, 'total') || 0) : 0;
+        var empresas = d ? Number(lerCampo(d.fields, 'empresas') || 0) : 0;
+        var total = pessoas + empresas;
+        // O contador só aparece depois de um número mínimo de apoios
+        if(total < MINIMO_PARA_MOSTRAR) return;
         var el = document.getElementById('total');
         el.textContent = formatar(total); el.setAttribute('data-text', formatar(total));
-        document.getElementById('total-rotulo').textContent = total === 1 ? 'pessoa assinou.' : 'pessoas assinaram.';
+        var quem = [];
+        if(pessoas) quem.push(formatar(pessoas) + (pessoas === 1 ? ' pessoa' : ' pessoas'));
+        if(empresas) quem.push(formatar(empresas) + (empresas === 1 ? ' empresa' : ' empresas'));
+        document.getElementById('total-rotulo').textContent = 'apoios ao manifesto: ' + quem.join(' e ') + '.';
         var inc = Number(lerCampo(d.fields, 'incentivar') || 0), div = Number(lerCampo(d.fields, 'divulgar') || 0);
         var partes = [];
         if(inc) partes.push(formatar(inc) + (inc === 1 ? ' vai incentivar' : ' vão incentivar') + ' na empresa onde trabalha' + (inc === 1 ? '' : 'm'));

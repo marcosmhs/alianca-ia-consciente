@@ -69,8 +69,8 @@ async function assinar(email, extra = {}, id = hash(email)) {
   await p.goto(SITE + "/");
   check(!(await p.textContent("#apoiadores")).includes("That Exotic Bug"), "seção de apoio sem nomes de empresas");
   check(await p.$("#lista-signatarias") === null, "lista de empresas removida do site");
-  await p.waitForSelector("#contador:not([hidden])", { timeout: 8000 }).catch(() => {});
-  check((await p.textContent("#total")).trim() === "1", "site mostra o contador");
+  await espera(1500);
+  check(await p.isHidden("#contador") && await p.isVisible("#apoio-vazio"), "contador escondido com menos de 500 apoios");
 
   await p.click("#p-enviar");
   check((await p.$$eval("#form-pessoa .error", (e) => e.length)) === 3, "formulário vazio aponta nome, e-mail e consentimento");
@@ -119,7 +119,7 @@ async function assinar(email, extra = {}, id = hash(email)) {
     if (sc === "light") {
       const nomes = await q.$$eval("#lista-apoiadores li", (e) => e.map((x) => x.firstChild.textContent));
       check(JSON.stringify(nomes) === JSON.stringify(["<b>Gabi</b> Souza"]), "site lista o apoiador aprovado, como texto: " + JSON.stringify(nomes));
-      check((await q.textContent("#total")).trim() === "2", "site mostra 2 assinaturas");
+      check(await q.isHidden("#contador"), "contador continua escondido com 2 apoios");
     }
     await q.locator("#apoiadores").screenshot({ path: `test/apoiadores-${sc}.png` });
     await q.locator("#participar").screenshot({ path: `test/assinatura-${sc}.png` });
@@ -146,12 +146,30 @@ async function assinar(email, extra = {}, id = hash(email)) {
   check((await contador()).total === 2, "recusar não muda o contador");
 
   // Empresa: e-mail sem botões de publicar
+  const lerEmpresas = async () => { const r = await fetch(FS + DB + "/contadores/assinaturas", { headers: admin }); const f = (await r.json()).fields || {}; return Number(f.empresas?.integerValue || 0); };
+  const empresasAntes = await lerEmpresas();
   emails.length = 0;
   await fetch(FS + DB + ":commit", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ writes: [{
     update: { name: DB + "/interesse/emp1", fields: { empresa: s("Empresa X"), setor: s("tecnologia"), porte: s("51-200"), nome: s("Hugo"), cargo: s("CTO"), email: s("hugo@x.com"), participacao: s("signataria"), pilotos: { arrayValue: { values: [] } }, consentimento: { booleanValue: true } } },
     updateTransforms: [{ fieldPath: "criadoEm", setToServerValue: "REQUEST_TIME" }], currentDocument: { exists: false } }] }) });
   const me = await aguardar(() => emails[0]);
   check(!!me && me.subject.includes("Empresa X") && !me.text.includes("/moderar"), "inscrição de empresa avisa por e-mail, sem botões de publicar");
+  const ok1 = await aguardar(async () => (await lerEmpresas()) === empresasAntes + 1);
+  check(!!ok1 && (await contador()).total === 2, "inscrição de empresa soma 1 em empresas, sem mexer nas pessoas");
+
+  // Limite de 500: com 499 o contador fica escondido, com 500 aparece
+  const fixar = (pessoas, empresas) => fetch(FS + DB + "/contadores/assinaturas?updateMask.fieldPaths=total&updateMask.fieldPaths=empresas", { method: "PATCH", headers: { ...admin, "Content-Type": "application/json" }, body: JSON.stringify({ fields: { total: { integerValue: String(pessoas) }, empresas: { integerValue: String(empresas) } } }) });
+  const b2 = await chromium.launch();
+  await fixar(489, 10);
+  let z = await b2.newPage(); await z.goto(SITE + "/#apoiadores"); await espera(1500);
+  check(await z.isHidden("#contador"), "com 499 apoios o contador fica escondido");
+  await fixar(490, 10);
+  z = await b2.newPage(); await z.goto(SITE + "/#apoiadores");
+  await z.waitForSelector("#contador:not([hidden])", { timeout: 8000 }).catch(() => {});
+  check((await z.textContent("#total")).trim() === "500" && (await z.textContent("#total-rotulo")).includes("490 pessoas e 10 empresas"), "com 500 apoios o contador aparece: " + (await z.textContent("#contador")).replace(/\s+/g, " ").trim());
+  check(await z.isHidden("#apoio-vazio"), "o convite some quando o contador aparece");
+  await z.locator("#apoiadores").screenshot({ path: "test/contador-500.png" });
+  await b2.close();
 
   await b.close();
   srv.close();

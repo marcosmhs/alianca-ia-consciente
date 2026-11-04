@@ -91,13 +91,14 @@ async function enviarEmail({ assunto, texto, html, replyTo }) {
 }
 const responderPara = (nome, email) => (email ? `"${String(nome || "").replace(/"/g, "")}" <${email}>` : undefined);
 
-// 1. Aviso por e-mail a cada inscrição de empresa
+// 1. Cada inscrição de empresa: soma no contador e avisa por e-mail
 exports.avisarNovaInscricao = onDocumentCreated(
   { document: "interesse/{id}", region: REGIAO, secrets: [GMAIL_APP_PASSWORD], maxInstances: 2, memory: "256MiB" },
   async (event) => {
     const d = event.data?.data();
     if (!d) return;
     const id = event.params.id;
+    await db.collection("contadores").doc("assinaturas").set({ empresas: FieldValue.increment(1), atualizadoEm: FieldValue.serverTimestamp() }, { merge: true });
     const linkConsole = `https://console.firebase.google.com/project/${process.env.GCLOUD_PROJECT}/firestore/data/~2Finteresse~2F${id}`;
     const pilotos = (d.pilotos || []).map((p) => rot("pilotos", p)).join(", ") || "Nenhuma";
     const linhas = [

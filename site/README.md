@@ -12,6 +12,7 @@ Página inicial com o manifesto, a assinatura de pessoas (com contador e lista d
 | Assinaturas de pessoas | `firestore.rules` | Qualquer visitante pode **criar** uma assinatura na coleção `assinaturas`. O id é o SHA-256 do e-mail, então cada e-mail assina uma única vez. Ninguém lê pelo site |
 | Contador e apoiadores | `firestore.rules` | `contadores/assinaturas` e `apoiadores` têm leitura pública e só são escritos pelas funções |
 | Contador e aviso | `functions/index.js` → `registrarAssinatura` | Soma cada assinatura no contador. Se a pessoa pediu para aparecer no site, envia um e-mail com Aprovar e Recusar |
+| Exibição do contador | `public/index.html` → `MINIMO_PARA_MOSTRAR` | O site só mostra o contador quando pessoas + empresas somam pelo menos 500. Antes disso, aparece o convite para assinar. As inscrições de empresas também entram no contador (campo `empresas`) |
 | Aprovação | `functions/index.js` → `moderarInscricao` | Página em `/moderar` que mostra ou retira o nome da lista de apoiadores. Os links são assinados (HMAC) e a ação só acontece no clique de confirmação (POST) |
 | Inscrições de empresas | `firestore.rules` e `functions/index.js` → `avisarNovaInscricao` | Coleção privada `interesse`. Cada inscrição gera um e-mail de aviso. As empresas não são listadas no site |
 | Páginas de conteúdo | `build/gerar-paginas.js` | Gera `public/compromissos/*.html`, `public/guias/*.html`, `public/assets/paginas.css` e `public/sitemap.xml` a partir dos `.md` do repositório |
