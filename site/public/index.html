@@ -245,6 +245,25 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--cyan);outline-of
 .done p{margin:0 0 8px;max-width:58ch}
 @media (max-width:720px){ fieldset,.choices.cols{grid-template-columns:minmax(0,1fr)} }
 
+/* Apoiadores e assinatura */
+.contador{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px;margin:12px 0 20px}
+.contador .total{font-weight:600;font-size:clamp(4rem,11vw,7rem);line-height:.9;font-variant-numeric:tabular-nums}
+.contador .rotulo{margin:0;font-size:1.2rem;max-width:40ch}
+.contador .rotulo b{font-weight:600}
+.apoiadores{list-style:none;margin:8px 0 0;padding:16px 0 0;border-top:1px solid var(--rule);columns:3 220px;column-gap:32px}
+.apoiadores li{break-inside:avoid;padding:6px 0;font-size:1.02rem}
+.apoiadores li small{display:block;color:var(--muted);font-size:.84rem}
+.apoio-nota{font-size:.84rem;color:var(--muted);margin:12px 0 0}
+.compartilhar{margin-top:20px}
+.compartilhar .label{display:block;margin-bottom:10px}
+.empresas{margin-top:56px;border-top:2px solid var(--ink);padding-top:16px}
+.empresas summary{cursor:pointer;font-weight:600;font-size:1.2rem;list-style:none;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 20px;align-items:baseline}
+.empresas summary::-webkit-details-marker{display:none}
+.empresas summary span{color:var(--cyan-text);font-size:.95rem}
+.empresas summary span::after{content:" ↓"}
+.empresas[open] summary span::after{content:" ↑"}
+.empresas > .intro{margin-top:16px}
+
 /* Rodapé */
 .sources{font-size:.84rem;color:var(--muted)}
 .sources ol{margin:12px 0 0;padding-left:1.4em;columns:2;column-gap:40px}
@@ -268,7 +287,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <div class="theme" role="group" aria-label="Tema">
         <button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Escuro</button><button type="button" data-t="system">Sistema</button>
       </div>
-      <a class="btn" href="#participar">Quero participar</a>
+      <a class="btn" href="#participar">Assinar o manifesto</a>
     </nav>
   </div>
   <div class="wrap"><hr class="double"></div>
@@ -281,14 +300,14 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       <h1 id="titulo">A IA sugere.<br><span class="plates" data-text="Você decide.">Você decide.</span></h1>
       <p class="lead">Um compromisso entre empresas de tecnologia para usar inteligência artificial todos os dias, com método e consciência, sem deixar que ela fale pelas pessoas.</p>
       <div class="cta">
-        <a class="btn" href="#participar">Inscrever minha empresa</a>
+        <a class="btn" href="#participar">Assinar o manifesto</a>
         <a class="btn ghost" href="#compromissos">Ler os oito compromissos</a>
         <a class="btn ghost" href="https://github.com/marcosmhs/alianca-ia-consciente/blob/main/MANIFESTO.md" target="_blank" rel="noopener">Manifesto completo no GitHub</a>
       </div>
 
       <div class="strip">
         <hr class="double">
-        <div class="strip-meta"><span>Proposta: That Exotic Bug</span><span>Novembro de 2026</span><span>Status: aberto para adesão</span></div>
+        <div class="strip-meta"><span>Proposta: That Exotic Bug</span><span>Novembro de 2026</span><span>Aberto para assinaturas</span></div>
         <div class="leaders">
           <div class="leader"><span>Empresas brasileiras que já usam IA generativa</span><i></i><b>95%</b></div>
           <div class="leader"><span>Usuários de IA que levam a própria ferramenta</span><i></i><b>78%</b></div>
@@ -381,14 +400,17 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
       </div>
     </section>
 
-    <section id="signatarias" aria-labelledby="t-prop">
-      <p class="eyebrow">Signatárias</p>
-      <h2 id="t-prop">Quem já faz parte</h2>
-      <p class="intro">As empresas aparecem aqui depois que a inscrição é aprovada pelo comitê da aliança.</p>
-      <div class="props" id="lista-signatarias">
-        <div class="prop"><div class="line"><a href="https://www.marcosmhs.com.br/" target="_blank" rel="noopener">That Exotic Bug</a></div><small>Empresa proponente</small></div>
-        <div class="prop open" id="vaga"><div class="line"><a href="#participar">Sua empresa</a></div><small>Inscreva-se para participar</small></div>
+    <section id="apoiadores" aria-labelledby="t-apoio">
+      <p class="eyebrow">Quem apoia</p>
+      <h2 id="t-apoio">Pessoas que assinaram o manifesto</h2>
+      <div class="contador" id="contador" hidden>
+        <span class="total plates num" id="total" data-text="0">0</span>
+        <p class="rotulo"><span id="total-rotulo">pessoas assinaram.</span> <span id="detalhe"></span></p>
       </div>
+      <p class="intro" id="apoio-vazio">Seja uma das primeiras pessoas a assinar. Qualquer pessoa pode apoiar a aliança, incentivando os compromissos na empresa onde trabalha ou ajudando a divulgar.</p>
+      <ul class="apoiadores" id="lista-apoiadores" hidden></ul>
+      <p class="apoio-nota" id="apoio-nota" hidden>A lista mostra quem pediu para aparecer, depois de uma revisão rápida.</p>
+      <div class="cta" style="margin-top:28px"><a class="btn" href="#participar">Assinar também</a></div>
     </section>
   </div>
 
@@ -396,12 +418,55 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
     <div class="wrap">
       <div class="two">
         <div>
-          <p class="eyebrow">Inscrição de interesse</p>
-          <h2 id="t-form">Quer ser uma das <span class="plates" data-text="empresas fundadoras?">empresas fundadoras?</span></h2>
+          <p class="eyebrow">Assine o manifesto</p>
+          <h2 id="t-form">Apoie a aliança. <span class="plates" data-text="Assine você também.">Assine você também.</span></h2>
         </div>
-        <p class="intro">Conte um pouco sobre a sua empresa. O comitê entra em contato para apresentar o manifesto e combinar os próximos passos. A inscrição não cria nenhum compromisso formal.</p>
+        <p class="intro">Qualquer pessoa pode assinar, como incentivadora dos compromissos na empresa onde trabalha ou como divulgadora da aliança. Leva menos de um minuto.</p>
       </div>
 
+      <form id="form-pessoa" novalidate>
+        <fieldset>
+          <legend>Sua assinatura</legend>
+          <div class="field"><label for="p-nome">Seu nome</label><input id="p-nome" name="nome" type="text" autocomplete="name" required maxlength="80"></div>
+          <div class="field"><label for="p-email">E-mail</label><input id="p-email" name="email" type="email" autocomplete="email" required maxlength="160"><p class="hint">Não aparece no site. Serve para evitar assinaturas repetidas.</p></div>
+          <div class="field full"><label for="p-cargo">Cargo ou área <span class="opt">(opcional)</span></label><input id="p-cargo" name="cargo" type="text" autocomplete="organization-title" maxlength="80" placeholder="Ex.: Engenheira de dados"></div>
+          <div class="field full">
+            <span class="label" id="l-apoio">Como você quer apoiar?</span>
+            <div class="choices cols" role="group" aria-labelledby="l-apoio">
+              <label class="choice"><input type="checkbox" name="apoio" value="incentivar" checked><span>Incentivar<small>Levar os compromissos para a empresa onde trabalho.</small></span></label>
+              <label class="choice"><input type="checkbox" name="apoio" value="divulgar" checked><span>Divulgar<small>Compartilhar a aliança com colegas e nas redes.</small></span></label>
+            </div>
+          </div>
+          <div class="field full">
+            <label class="choice"><input id="p-publico" name="publico" type="checkbox"><span>Mostrar meu nome e cargo na lista de apoiadores do site<small>Depois de uma revisão rápida. O e-mail nunca aparece.</small></span></label>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="p-website">Não preencha</label><input id="p-website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+          <div class="field consent">
+            <label class="choice"><input id="p-consentimento" name="consentimento" type="checkbox" required><span>Autorizo o uso destes dados para registrar minha assinatura e para eventuais contatos sobre a Aliança IA Consciente, conforme a LGPD. Os dados não serão compartilhados com terceiros.</span></label>
+          </div>
+        </fieldset>
+        <div class="submit-row">
+          <button class="btn" id="p-enviar" type="submit">Assinar o manifesto</button>
+          <p class="status" id="p-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="done" id="p-done" hidden tabindex="-1">
+        <h3 id="p-done-titulo">Obrigado por assinar.</h3>
+        <p id="p-done-texto">Sua assinatura já conta no total.</p>
+        <div class="compartilhar">
+          <p class="label">Ajude a divulgar:</p>
+          <div class="cta">
+            <a class="btn" id="share-linkedin" target="_blank" rel="noopener">Compartilhar no LinkedIn</a>
+            <a class="btn ghost" id="share-whatsapp" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+            <button class="btn ghost" id="share-copiar" type="button">Copiar link</button>
+          </div>
+        </div>
+      </div>
+
+      <details class="empresas" id="empresas">
+        <summary>Sua empresa quer aderir à aliança? <span>Inscreva a empresa</span></summary>
+        <p class="intro">Conte um pouco sobre a sua empresa. O comitê entra em contato para apresentar o manifesto e combinar os próximos passos. A inscrição não cria nenhum compromisso formal.</p>
       <form id="form" novalidate>
         <fieldset>
           <legend>Empresa</legend>
@@ -475,6 +540,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
         <p>Obrigado. O comitê da aliança vai entrar em contato pelo e-mail informado.</p>
         <p><a href="#compromissos">Reler os oito compromissos</a></p>
       </div>
+      </details>
     </div>
   </section>
 
@@ -525,34 +591,133 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
     }).then(function(c){ return { projectId: c.projectId, apiKey: c.apiKey, base: 'https://firestore.googleapis.com' }; });
   }
 
-  // Empresas aprovadas (coleção pública "signatarias")
-  var CATEGORIA = { fundadora: 'Empresa fundadora', signataria: 'Empresa signatária' };
-  function carregarSignatarias(){
-    var lista = document.getElementById('lista-signatarias');
-    var vaga = document.getElementById('vaga');
+  function str(v){ return { stringValue: v }; }
+  function lerCampo(f, k){ return f && f[k] ? (f[k].stringValue || f[k].timestampValue || f[k].integerValue || '') : ''; }
+  function urlColecao(c, caminho, extra){ return c.base + '/v1/projects/' + c.projectId + '/databases/(default)/documents/' + caminho + '?' + (extra || '') + (c.apiKey ? '&key=' + encodeURIComponent(c.apiKey) : ''); }
+  function formatar(n){ return Number(n).toLocaleString('pt-BR'); }
+
+  // Contador e apoiadores aprovados (coleções públicas "contadores" e "apoiadores")
+  function carregarApoio(){
     config().then(function(c){
-      var url = c.base + '/v1/projects/' + c.projectId + '/databases/(default)/documents/signatarias?pageSize=200' + (c.apiKey ? '&key=' + encodeURIComponent(c.apiKey) : '');
-      return fetch(url).then(function(r){ if(!r.ok) throw new Error('http ' + r.status); return r.json(); });
-    }).then(function(j){
-      var docs = (j.documents || []).map(function(d){
-        var f = d.fields || {};
-        var val = function(k){ return f[k] ? (f[k].stringValue || f[k].timestampValue || '') : ''; };
-        return { empresa: val('empresa'), site: val('site'), categoria: val('categoria'), quando: val('aprovadaEm') };
-      }).filter(function(d){ return d.empresa; });
-      docs.sort(function(a, b){ return a.quando < b.quando ? -1 : 1; });
-      docs.forEach(function(d){
-        var card = document.createElement('div'); card.className = 'prop';
-        var linha = document.createElement('div'); linha.className = 'line';
-        if(/^https?:\/\//i.test(d.site)){
-          var a = document.createElement('a'); a.href = d.site; a.target = '_blank'; a.rel = 'noopener nofollow'; a.textContent = d.empresa; linha.appendChild(a);
-        } else { linha.textContent = d.empresa; }
-        var rot = document.createElement('small'); rot.textContent = CATEGORIA[d.categoria] || 'Empresa signatária';
-        card.appendChild(linha); card.appendChild(rot);
-        lista.insertBefore(card, vaga);
-      });
-    }).catch(function(){ /* sem a lista, o site continua funcionando */ });
+      fetch(urlColecao(c, 'contadores/assinaturas')).then(function(r){ return r.ok ? r.json() : null; }).then(function(d){
+        var total = d ? Number(lerCampo(d.fields, 'total') || 0) : 0;
+        if(!total) return;
+        var el = document.getElementById('total');
+        el.textContent = formatar(total); el.setAttribute('data-text', formatar(total));
+        document.getElementById('total-rotulo').textContent = total === 1 ? 'pessoa assinou.' : 'pessoas assinaram.';
+        var inc = Number(lerCampo(d.fields, 'incentivar') || 0), div = Number(lerCampo(d.fields, 'divulgar') || 0);
+        var partes = [];
+        if(inc) partes.push(formatar(inc) + (inc === 1 ? ' vai incentivar' : ' vão incentivar') + ' na empresa onde trabalha' + (inc === 1 ? '' : 'm'));
+        if(div) partes.push(formatar(div) + (div === 1 ? ' vai divulgar' : ' vão divulgar'));
+        document.getElementById('detalhe').textContent = partes.length ? partes.join(' e ') + '.' : '';
+        document.getElementById('contador').hidden = false;
+        document.getElementById('apoio-vazio').hidden = true;
+      }).catch(function(){});
+      fetch(urlColecao(c, 'apoiadores', 'pageSize=300&orderBy=aprovadoEm%20desc')).then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+        var docs = (j && j.documents) || [];
+        if(!docs.length) return;
+        var lista = document.getElementById('lista-apoiadores');
+        docs.forEach(function(d){
+          var nome = lerCampo(d.fields, 'nome'); if(!nome) return;
+          var li = document.createElement('li'); li.textContent = nome;
+          var cargo = lerCampo(d.fields, 'cargo');
+          if(cargo){ var sm = document.createElement('small'); sm.textContent = cargo; li.appendChild(sm); }
+          lista.appendChild(li);
+        });
+        lista.hidden = false; document.getElementById('apoio-nota').hidden = false;
+      }).catch(function(){});
+    }).catch(function(){ /* sem os números, o site continua funcionando */ });
   }
-  carregarSignatarias();
+  carregarApoio();
+
+  // Assinatura de pessoas
+  var fp = document.getElementById('form-pessoa');
+  var pStatus = document.getElementById('p-status');
+  var pEnviar = document.getElementById('p-enviar');
+  var pDone = document.getElementById('p-done');
+  var LINK = 'https://aliancaiaconsciente.com.br/';
+  var MSG_SHARE = 'Assinei o manifesto da Aliança IA Consciente: a IA sugere, você decide. Assine também: ' + LINK;
+  document.getElementById('share-linkedin').href = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(LINK);
+  document.getElementById('share-whatsapp').href = 'https://wa.me/?text=' + encodeURIComponent(MSG_SHARE);
+  document.getElementById('share-copiar').addEventListener('click', function(){
+    var b = this;
+    var ok = function(){ b.textContent = 'Link copiado'; setTimeout(function(){ b.textContent = 'Copiar link'; }, 1800); };
+    if(navigator.clipboard){ navigator.clipboard.writeText(LINK).then(ok, function(){ b.textContent = LINK; }); } else { b.textContent = LINK; }
+  });
+  var P_MSG = {
+    nome: 'Informe seu nome.', email: 'Informe um e-mail válido, como nome@exemplo.com.br.',
+    apoio: 'Escolha pelo menos uma forma de apoiar.', consentimento: 'Para assinar, é preciso autorizar o registro da assinatura.'
+  };
+  function pErro(name){
+    var input = fp.querySelector('[name="' + name + '"]');
+    var field = input.closest('.field');
+    field.setAttribute('data-invalid', '');
+    var e = document.createElement('p'); e.className = 'error'; e.id = 'p-err-' + name; e.textContent = P_MSG[name];
+    field.appendChild(e); input.setAttribute('aria-describedby', e.id);
+    return input;
+  }
+  function sha256(texto){
+    return crypto.subtle.digest('SHA-256', new TextEncoder().encode(texto)).then(function(buf){
+      return Array.prototype.map.call(new Uint8Array(buf), function(b){ return ('0' + b.toString(16)).slice(-2); }).join('');
+    });
+  }
+  function concluir(titulo, texto){
+    document.getElementById('p-done-titulo').textContent = titulo;
+    document.getElementById('p-done-texto').textContent = texto;
+    fp.hidden = true; pDone.hidden = false; pDone.focus();
+  }
+  fp.addEventListener('submit', function(ev){
+    ev.preventDefault();
+    fp.querySelectorAll('[data-invalid]').forEach(function(f){ f.removeAttribute('data-invalid'); });
+    fp.querySelectorAll('.error').forEach(function(e){ e.remove(); });
+    pStatus.textContent = ''; pStatus.className = 'status';
+    var fd = new FormData(fp);
+    var v = function(k){ return (fd.get(k) || '').toString().trim(); };
+    var apoio = fd.getAll('apoio').map(String);
+    var first = null;
+    var marcar = function(campo){ var el = pErro(campo); first = first || el; };
+    if(v('nome').length < 2) marcar('nome');
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v('email'))) marcar('email');
+    if(!apoio.length) marcar('apoio');
+    if(!fd.get('consentimento')) marcar('consentimento');
+    if(first){ first.focus(); pStatus.textContent = 'Revise os campos marcados.'; pStatus.className = 'status err'; return; }
+    var publico = !!fd.get('publico');
+    var textoOk = publico ? 'Sua assinatura já conta no total. Seu nome aparece na lista depois de uma revisão rápida.' : 'Sua assinatura já conta no total.';
+    if(v('website')){ concluir('Obrigado por assinar.', textoOk); return; }
+
+    var email = v('email').toLowerCase();
+    var fields = {
+      nome: str(v('nome')), email: str(email),
+      apoio: { arrayValue: { values: apoio.map(function(a){ return str(a); }) } },
+      publico: { booleanValue: publico }, consentimento: { booleanValue: true },
+      origem: str((document.referrer || 'direto').slice(0, 200))
+    };
+    if(v('cargo')) fields.cargo = str(v('cargo'));
+
+    pEnviar.disabled = true; pStatus.textContent = 'Enviando…';
+    Promise.all([config(), sha256(email)]).then(function(res){
+      var c = res[0], id = res[1];
+      var db = 'projects/' + c.projectId + '/databases/(default)/documents';
+      var url = c.base + '/v1/' + db + ':commit' + (c.apiKey ? '?key=' + encodeURIComponent(c.apiKey) : '');
+      return fetch(url, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ writes: [{
+          update: { name: db + '/assinaturas/' + id, fields: fields },
+          updateTransforms: [{ fieldPath: 'criadoEm', setToServerValue: 'REQUEST_TIME' }],
+          currentDocument: { exists: false }
+        }] })
+      });
+    }).then(function(r){
+      if(r.ok){ concluir('Obrigado por assinar.', textoOk); return; }
+      // Os dados já foram validados aqui; uma recusa do banco indica que o e-mail já assinou
+      if(r.status === 400 || r.status === 403 || r.status === 409){ concluir('Este e-mail já assinou o manifesto.', 'Obrigado pelo apoio. Que tal ajudar a divulgar?'); return; }
+      throw new Error('http ' + r.status);
+    }).catch(function(){
+      pEnviar.disabled = false;
+      pStatus.textContent = 'Não foi possível enviar agora. Verifique a conexão e tente de novo em alguns instantes.';
+      pStatus.className = 'status err';
+    });
+  });
 
   var MSG = {
     empresa: 'Informe o nome da empresa.', setor: 'Selecione o setor.', porte: 'Selecione o número de colaboradores.',
@@ -572,7 +737,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
     input.setAttribute('aria-describedby', p.id);
     return input;
   }
-  function str(v){ return { stringValue: v }; }
 
   form.addEventListener('submit', function(ev){
     ev.preventDefault();

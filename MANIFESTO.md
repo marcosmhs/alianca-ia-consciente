@@ -55,6 +55,8 @@ Os primeiros 90 dias de cada empresa estão descritos no [Piloto de 90 dias](gui
 
 ## Adesão
 
-A inscrição de interesse é feita em **https://aliancaiaconsciente.com.br**. As empresas aparecem no site depois que a inscrição é aprovada pelo comitê.
+Qualquer pessoa pode **assinar o manifesto** em **https://aliancaiaconsciente.com.br**, como incentivadora dos compromissos na empresa onde trabalha, como divulgadora da aliança, ou as duas coisas. Quem quiser pode aparecer na lista pública de apoiadores, depois de uma revisão rápida.
+
+Empresas que queiram aderir fazem a inscrição de interesse no mesmo endereço.
 
 Proposta: That Exotic Bug.

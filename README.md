@@ -51,8 +51,9 @@ CONTRIBUTING.md     como propor mudanças
 
 ## Como participar
 
-- **Empresas:** façam a inscrição de interesse no [site](https://aliancaiaconsciente.com.br/#participar). As empresas aparecem na lista de signatárias depois que a inscrição é aprovada pelo comitê.
-- **Pessoas:** sugestões, correções e novos fluxos são bem-vindos. Veja [como contribuir](CONTRIBUTING.md).
+- **Pessoas:** assinem o manifesto no [site](https://aliancaiaconsciente.com.br/#participar), como incentivadoras ou divulgadoras. Quem quiser aparece na lista pública de apoiadores, depois de uma revisão rápida.
+- **Empresas:** façam a inscrição de interesse no mesmo formulário, em "Sua empresa quer aderir à aliança?".
+- **Contribuições:** sugestões, correções e novos fluxos são bem-vindos. Veja [como contribuir](CONTRIBUTING.md).
 
 ## Status
 

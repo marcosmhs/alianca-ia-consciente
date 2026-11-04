@@ -38,8 +38,41 @@ service cloud.firestore {
       allow read, update, delete: if false;
     }
 
-    // Empresas aprovadas: leitura pública; só a função de moderação escreve
+    // Empresas aprovadas (lista não é mais exibida no site; mantida para histórico)
     match /signatarias/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Assinaturas de pessoas. O id é o SHA-256 do e-mail em minúsculas,
+    // para que cada e-mail assine uma única vez.
+    function assinaturaValida(id, d) {
+      return d.keys().hasAll(['nome', 'email', 'apoio', 'publico', 'consentimento', 'criadoEm'])
+        && d.keys().hasOnly(['nome', 'email', 'cargo', 'apoio', 'publico', 'consentimento', 'criadoEm', 'origem'])
+        && texto(d.nome, 2, 80)
+        && texto(d.email, 6, 160)
+        && d.email == d.email.lower()
+        && d.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$')
+        && id == hashing.sha256(d.email).toHexString().lower()
+        && (!('cargo' in d) || texto(d.cargo, 0, 80))
+        && d.apoio is list && d.apoio.size() >= 1 && d.apoio.hasOnly(['incentivar', 'divulgar'])
+        && d.publico is bool
+        && d.consentimento == true
+        && (!('origem' in d) || texto(d.origem, 0, 200))
+        && d.criadoEm == request.time;
+    }
+
+    match /assinaturas/{id} {
+      allow create: if assinaturaValida(id, request.resource.data);
+      allow read, update, delete: if false;
+    }
+
+    // Apoiadores aprovados e contador: leitura pública; só as funções escrevem
+    match /apoiadores/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+    match /contadores/{id} {
       allow read: if true;
       allow write: if false;
     }

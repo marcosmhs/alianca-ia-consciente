@@ -24,11 +24,12 @@ async function commit(fields,ts=true,id=Math.random().toString(16).slice(2)){
     await p.goto('http://localhost:5000/');await p.waitForTimeout(1200);
     await p.screenshot({path:`test/site-${scheme}.png`});
     if(scheme==='light'){
-      await p.click('#enviar');const errs=await p.$$eval('.error',e=>e.length);console.log((errs===8?'OK  ':'FAIL')+' validação vazia mostra '+errs+' erros');if(errs!==8)fail++;
+      await p.click('#empresas summary');
+      await p.click('#enviar');const errs=await p.$$eval('#form .error',e=>e.length);console.log((errs===8?'OK  ':'FAIL')+' validação vazia (empresa) mostra '+errs+' erros');if(errs!==8)fail++;
       await p.fill('#empresa','Empresa Teste');await p.selectOption('#setor','mobilidade');await p.selectOption('#porte','201-1000');
       await p.fill('#nome','Fulano Teste');await p.fill('#cargo','Head de Dados');await p.fill('#email','fulano@teste.com.br');
       await p.check('input[value=fundadora]');await p.check('input[value=dados]');await p.check('#consentimento');
-      await p.click('#enviar');await p.waitForSelector('#done:not([hidden])',{timeout:8000}).then(()=>console.log('OK   formulário enviado pelo navegador')).catch(()=>{fail++;console.log('FAIL formulário no navegador')});
+      await p.click('#enviar');await p.waitForSelector('#done:not([hidden])',{timeout:8000}).then(()=>console.log('OK   formulário de empresa enviado pelo navegador')).catch(()=>{fail++;console.log('FAIL formulário no navegador')});
       await p.locator('#participar').screenshot({path:'test/form-done.png'});
     } else {
       await p.locator('#participar').screenshot({path:'test/form-dark.png'});

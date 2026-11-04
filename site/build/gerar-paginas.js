@@ -299,7 +299,7 @@ ${JS_REDIRECIONA}${JS_TEMA_CEDO}<link rel="preconnect" href="https://fonts.googl
       <div class="theme" role="group" aria-label="Tema">
         <button type="button" data-t="light">Claro</button><button type="button" data-t="dark">Escuro</button><button type="button" data-t="system">Sistema</button>
       </div>
-      <a class="btn" href="/#participar">Quero participar</a>
+      <a class="btn" href="/#participar">Assinar o manifesto</a>
     </nav>
   </div>
   <div class="wrap"><hr class="double"></div>
@@ -321,8 +321,8 @@ ${JS_REDIRECIONA}${JS_TEMA_CEDO}<link rel="preconnect" href="https://fonts.googl
 ${corpoHtml}
         ${pagHtml}
         <div class="chamada">
-          <p>Sua empresa quer usar IA assim? Seja uma das fundadoras da aliança.</p>
-          <a class="btn" href="/#participar">Inscrever minha empresa</a>
+          <p>Concorda com estes princípios? Assine o manifesto e ajude a divulgar.</p>
+          <a class="btn" href="/#participar">Assinar o manifesto</a>
         </div>
         <p class="fonte-md">Texto aberto sob <a href="${REPO}/blob/main/LICENSE" target="_blank" rel="noopener">CC BY 4.0</a>. <a href="${REPO}/blob/main/${fonteMd}" target="_blank" rel="noopener">Ver ou sugerir mudanças no GitHub</a>.</p>
       </article>
